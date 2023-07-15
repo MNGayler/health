@@ -30,7 +30,11 @@ module.exports = function(sequelize, DataTypes) {
     fibre: {
       type: DataTypes.FLOAT,
       allowNull: false
-    }
+    },
+    image: {
+      type: DataTypes.STRING(255),
+      allowNull: true
+    },
   }, {
     sequelize,
     tableName: 'meal',

@@ -2,10 +2,11 @@ const express = require("express");
 const app = express();
 
 const db = require("./models");
+app.use(express.json());
 
 //ROUTERS
-const globalFoodItemsRouter = require("./routes/Global_food_items")
-app.use("/globalfooditems", globalFoodItemsRouter)
+const globalFoodItemsRouter = require("./routes/Global_food_items");
+app.use("/globalfooditems", globalFoodItemsRouter);
 
 //create database tables if they dont exist and start server
 db.sequelize.sync().then(() => {
