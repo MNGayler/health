@@ -16,6 +16,9 @@ span {
   width: 25%;
   padding: 10px;
   text-align: center;
+  display: flex;
+  flex-direction: column; /* Align items vertically */
+  align-items: center; /* Center items horizontally */
 }
 
 .item img {
@@ -23,7 +26,23 @@ span {
   margin-bottom: 10px;
   width: 100%;
   height: auto;
+  flex-shrink: 0; /* Prevent image from shrinking */
 }
+
+.item .info {
+  flex-grow: 1; /* Allow info div to grow and fill available space */
+  display: flex;
+  flex-direction: column; /* Align children vertically */
+  justify-content: center; /* Center children vertically */
+}
+
+
+
+
+
+
+
+
 
 .item .food-name {
   font-weight: bold;
@@ -32,6 +51,7 @@ span {
 .global-image img {
   width: 100px;
 }
+
 
 
 
