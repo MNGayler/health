@@ -10,6 +10,8 @@ app.use(cors());
 //ROUTERS
 const globalFoodItemsRouter = require("./routes/Global_food_items");
 app.use("/globalfooditems", globalFoodItemsRouter);
+const userFoodItemsRouter = require("./routes/Users_food_item");
+app.use("/userfooditems", userFoodItemsRouter);
 
 
 

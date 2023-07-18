@@ -6,23 +6,19 @@ populated only by Admin Users.
 
 This module contains the following routes:
 
-GET    /global_food_items: Retrieves a list of all global food items.
-GET    /global_food_items/byId/:id: Retrieves a global food item by ID.
-POST   /global_food_items: Creates a new global food item.
-PUT    /global_food_items/byId/:id: Updates a global food item by ID.
-DELETE /global_food_items/byId/:id: Deletes a global food item by ID
+GET    /globalfooditems: Retrieves a list of all global food items.
+GET    /globalfooditems/byId/:id: Retrieves a global food item by ID.
+POST   /globalfooditems: Creates a new global food item.
+PUT    /globalfooditems/byId/:id: Updates a global food item by ID.
+DELETE /globalfooditems/byId/:id: Deletes a global food item by ID
 
 */
-
-
-
-
-
-
 
 const express = require("express");
 const router = express.Router();
 const { global_food_item } = require("../models");
+
+
 //get all
 router.get("/", async (req, res) => {
   const listOfGlobalItems = await global_food_item.findAll();
@@ -31,11 +27,17 @@ router.get("/", async (req, res) => {
 
 //get individual using primary key, id.
 router.get("/byId/:id", async (req, res) => {
-  const id = req.params.id;
-  const item = await global_food_item.findByPk(id);
-  res.json(item);
+  try {
+    const id = req.params.id;
+    const item = await global_food_item.findByPk(id);
+    res.json(item);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 });
 
+// Add a row to the table
 router.post("/", async (req, res) => {
   const globalItem = req.body;
   //using sequelizes' "create" - post globalItem into the global_food_item table
@@ -55,7 +57,7 @@ router.put("/byId/:id", async (req, res) => {
     if (!item) {
       return res.status(404).json({ error: "Item not found" });
     }
-
+        
     // Update the item with the new data
     await item.update(updatedData);
 
