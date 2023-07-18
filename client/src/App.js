@@ -10,6 +10,11 @@ import AdminHome from "./pages/AdminHome";
 import RegisterAdmin from "./pages/RegisterAdmin"
 import UserRegister from "./pages/UserRegister"
 import ViewGlobalFoodItem from "./pages/ViewGlobalFoodItem";
+import UserFoodItems from "./pages/UserFoodItems";
+import UserAllFoodItems from "./pages/UserAllFoodItems";
+import UserMyFoodItems from "./pages/UserMyFoodItems";
+import UserAddItem from "./pages/UserAddItem"
+import ViewUserFoodItem from "./pages/ViewUserFoodItem"
 
 
 function App() {
@@ -23,6 +28,13 @@ function App() {
           <Route path="/globalfooditems" element={<GlobalFoodItems />} />
           <Route path="/globaladditem" element={<GlobalAddItem />} />
           <Route path="/viewglobalfooditem/:id" element={<ViewGlobalFoodItem />} />
+          {/* routes for user items */}
+          <Route path="/userfooditems" element={<UserFoodItems />} />
+          <Route path="/usermyfooditems" element={<UserMyFoodItems />} />
+          <Route path="/userallfooditems" element={<UserAllFoodItems />} />
+          <Route path="/useradditem" element={<UserAddItem />} />
+          <Route path="/viewuserfooditem/:id" element={<ViewUserFoodItem />} />
+          
 
           {/* other routes */}
           <Route path="/" element={<Home />} />
