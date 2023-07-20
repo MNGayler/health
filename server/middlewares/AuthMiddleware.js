@@ -1,3 +1,5 @@
+//middleware to verify any user has a jwt and it is valid
+
 const { verify } = require("jsonwebtoken");
 
 const validateToken = (req, res, next) => {
@@ -13,7 +15,7 @@ const validateToken = (req, res, next) => {
       return next();
     }
   } catch (error) {
-    return res.json({ Error: error });
+    return res.json({ Error: "Invalid or expired access token."});
   }
 };
 
