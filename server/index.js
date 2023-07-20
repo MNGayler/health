@@ -13,6 +13,8 @@ const userFoodItemsRouter = require("./routes/Users_food_item");
 app.use("/userfooditems", userFoodItemsRouter);
 const usersRouter = require("./routes/Users");
 app.use("/auth", usersRouter);
+const adminRouter = require("./routes/Admin")
+app.use("/authadmin", adminRouter)
 
 //create database tables if they dont exist and start server
 db.sequelize.sync().then(() => {
