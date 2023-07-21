@@ -26,10 +26,22 @@ const GlobalAddItem = () => {
 
   //function that runs when the form is sent and redirects to global food items
   const onSubmit = (data) => {
+    // Get the accessToken from sessionStorage
+    const accessToken = sessionStorage.getItem("accessToken");
+
+    // Set the headers for the request
+    const headers = {
+      accessToken: accessToken,
+    };
+
     axios
-      .post("http://localhost:6001/globalfooditems", data)
+      .post("http://localhost:6001/globalfooditems", data, { headers: headers })
       .then((response) => {
-        navigate("/globalfooditems");
+        if (response.data.error) {
+          console.log("Error:", response.data.error);
+        } else {
+          navigate("/globalfooditems");
+        }
       });
   };
 
@@ -48,7 +60,7 @@ const GlobalAddItem = () => {
             id="inputAddItem"
             name="food_name"
             placeholder="e.g. Apple"
-            autocomplete="off"
+            autoComplete="off"
           />
           <label>Energy (cals/100g): </label>
           <ErrorMessage name="energy" component="span" />
@@ -56,7 +68,7 @@ const GlobalAddItem = () => {
             id="inputAddItem"
             name="energy"
             placeholder="e.g. 10"
-            autocomplete="off"
+            autoComplete="off"
           />
           <label>Protien (mg/100g): </label>
           <ErrorMessage name="protien" component="span" />
@@ -64,7 +76,7 @@ const GlobalAddItem = () => {
             id="inputAddItem"
             name="protien"
             placeholder="e.g. 10"
-            autocomplete="off"
+            autoComplete="off"
           />
           <label>Fibre (mg/100g): </label>
           <ErrorMessage name="fibre" component="span" />
@@ -72,7 +84,7 @@ const GlobalAddItem = () => {
             id="inputAddItem"
             name="fibre"
             placeholder="e.g. 10"
-            autocomplete="off"
+            autoComplete="off"
           />
           <label>Image: </label>
           <ErrorMessage name="image" component="span" />
@@ -80,7 +92,7 @@ const GlobalAddItem = () => {
             id="inputAddItem"
             name="image"
             placeholder="path to image"
-            autocomplete="off"
+            autoComplete="off"
           />
           <button type="submit">Add Item</button>
         </Form>

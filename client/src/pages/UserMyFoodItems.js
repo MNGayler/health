@@ -19,12 +19,16 @@ const imageMapping = {
   courgette: courgetteImage,
 };
 
+// Get the user ID from session storage so we can send it with requests
+const userId = sessionStorage.getItem("userId");
+const headers = { userId: userId };
+
 const UserMyFoodItems = () => {
   let navigate = useNavigate();
   const [listOfUserFoodItems, setListOfUserFoodItems] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:6001/userfooditems").then((response) => {
+    axios.get("http://localhost:6001/userfooditems", { headers }).then((response) => {
       setListOfUserFoodItems(response.data);
       console.log(response.data);
     });
@@ -44,10 +48,13 @@ const UserMyFoodItems = () => {
       <Link to="/useradditem">
         <button>Add New Item</button>
       </Link>
+      <Link to="/userfooditems">
+        <button>back</button>
+      </Link>
       <div className="item-container">
-        {listOfUserFoodItems.map((value, key) => {
+        {listOfUserFoodItems.map((value, index) => {
           return (
-            <div className="item">
+            <div key={index} className="item">
               <div>
                 <img src={getImageSource(value.image)} alt={value.food_name} />
               </div>
