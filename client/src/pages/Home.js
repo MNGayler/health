@@ -8,6 +8,9 @@ const Home = () => {
       <Link to="/userlogin">
         <button>User login</button>
       </Link>
+      <Link to="/userregister">
+        <button>Register</button>
+      </Link>
       <Link to="/adminlogin">
         <button>Admin login</button>
       </Link>

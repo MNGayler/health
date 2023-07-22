@@ -8,6 +8,9 @@ const UserHome = () => {
       <Link to="/userfooditems">
         <button>Food Items</button>
       </Link>
+      <Link to="/userinfo">
+        <button>Personal Info</button>
+      </Link>
 
     </div>
   )

@@ -20,6 +20,7 @@ import GlogalUpdateItem from "./pages/GlogalUpdateItem";
 import ConsumeGlobalItem from "./pages/ConsumeGlobalItem";
 import ConsumeUserItem from "./pages/ConsumeUserItem";
 import ViewConsumption from "./pages/ViewConsumption";
+import UserInfo from "./pages/UserInfo";
 
 function App() {
   return (
@@ -51,11 +52,16 @@ function App() {
           />
           <Route path="/consumeuseritem/:id" element={<ConsumeUserItem />} />
 
+          {/* User routes */}
+          <Route path="/userhome" element={<UserHome />} />
+          <Route path="/userinfo" element={<UserInfo />} />
+
+
           {/* other routes */}
           <Route path="/" element={<Home />} />
           <Route path="/userlogin" element={<UserLogin />} />
           <Route path="/adminlogin" element={<AdminLogin />} />
-          <Route path="/userhome" element={<UserHome />} />
+          
           <Route path="/adminhome" element={<AdminHome />} />
           <Route path="/registeradmin" element={<RegisterAdmin />} />
           <Route path="/userregister" element={<UserRegister />} />
