@@ -19,7 +19,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATE,
       allowNull: false
     },
-    wieght: {
+    weight: {
       type: DataTypes.FLOAT,
       allowNull: false
     },

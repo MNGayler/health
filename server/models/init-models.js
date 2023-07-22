@@ -1,5 +1,5 @@
 var DataTypes = require("sequelize").DataTypes;
-var _calorie_tracking = require("./calorie_tracking");
+
 var _global_food_item = require("./global_food_item");
 var _intake_food_item = require("./intake_food_item");
 var _meal = require("./meal");
@@ -13,7 +13,6 @@ var _water_tracking = require("./water_tracking");
 var _weight_tracking = require("./weight_tracking");
 
 function initModels(sequelize) {
-  var calorie_tracking = _calorie_tracking(sequelize, DataTypes);
   var global_food_item = _global_food_item(sequelize, DataTypes);
   var intake_food_item = _intake_food_item(sequelize, DataTypes);
   var meal = _meal(sequelize, DataTypes);
@@ -26,35 +25,57 @@ function initModels(sequelize) {
   var water_tracking = _water_tracking(sequelize, DataTypes);
   var weight_tracking = _weight_tracking(sequelize, DataTypes);
 
-  meal_component.belongsTo(meal, { as: "meal_meal", foreignKey: "meal"});
-  meal.hasMany(meal_component, { as: "meal_components", foreignKey: "meal"});
-  meal_intake.belongsTo(meal, { as: "meal_meal", foreignKey: "meal"});
-  meal.hasMany(meal_intake, { as: "meal_intakes", foreignKey: "meal"});
-  calorie_tracking.belongsTo(users, { as: "id_user", foreignKey: "id"});
-  users.hasOne(calorie_tracking, { as: "calorie_tracking", foreignKey: "id"});
-  intake_food_item.belongsTo(users, { as: "user_user", foreignKey: "user"});
-  users.hasMany(intake_food_item, { as: "intake_food_items", foreignKey: "user"});
-  meal.belongsTo(users, { as: "user_user", foreignKey: "user"});
-  users.hasMany(meal, { as: "meals", foreignKey: "user"});
-  meal_intake.belongsTo(users, { as: "user_user", foreignKey: "user"});
-  users.hasMany(meal_intake, { as: "meal_intakes", foreignKey: "user"});
-  nutrient_tracking.belongsTo(users, { as: "user_user", foreignKey: "user"});
-  users.hasMany(nutrient_tracking, { as: "nutrient_trackings", foreignKey: "user"});
-  personal_info.belongsTo(users, { as: "user_user", foreignKey: "user"});
-  users.hasMany(personal_info, { as: "personal_infos", foreignKey: "user"});
-  users_food_item.belongsTo(users, { as: "user_user", foreignKey: "user"});
-  users.hasMany(users_food_item, { as: "users_food_items", foreignKey: "user"});
-  water_tracking.belongsTo(users, { as: "id_user", foreignKey: "id"});
-  users.hasOne(water_tracking, { as: "water_tracking", foreignKey: "id"});
-  weight_tracking.belongsTo(users, { as: "user_user", foreignKey: "user"});
-  users.hasMany(weight_tracking, { as: "weight_trackings", foreignKey: "user"});
-  intake_food_item.belongsTo(users_food_item, { as: "food_users_food_item", foreignKey: "food"});
-  users_food_item.hasMany(intake_food_item, { as: "intake_food_items", foreignKey: "food"});
-  meal_component.belongsTo(users_food_item, { as: "food_users_food_item", foreignKey: "food"});
-  users_food_item.hasMany(meal_component, { as: "meal_components", foreignKey: "food"});
+  meal_component.belongsTo(meal, { as: "meal_meal", foreignKey: "meal" });
+  meal.hasMany(meal_component, { as: "meal_components", foreignKey: "meal" });
+  meal_intake.belongsTo(meal, { as: "meal_meal", foreignKey: "meal" });
+  meal.hasMany(meal_intake, { as: "meal_intakes", foreignKey: "meal" });
+
+  intake_food_item.belongsTo(users, { as: "user_user", foreignKey: "user" });
+  users.hasMany(intake_food_item, {
+    as: "intake_food_items",
+    foreignKey: "user",
+  });
+  meal.belongsTo(users, { as: "user_user", foreignKey: "user" });
+  users.hasMany(meal, { as: "meals", foreignKey: "user" });
+  meal_intake.belongsTo(users, { as: "user_user", foreignKey: "user" });
+  users.hasMany(meal_intake, { as: "meal_intakes", foreignKey: "user" });
+  nutrient_tracking.belongsTo(users, { as: "user_user", foreignKey: "user" });
+  users.hasMany(nutrient_tracking, {
+    as: "nutrient_trackings",
+    foreignKey: "user",
+  });
+  personal_info.belongsTo(users, { as: "user_user", foreignKey: "user" });
+  users.hasMany(personal_info, { as: "personal_infos", foreignKey: "user" });
+  users_food_item.belongsTo(users, { as: "user_user", foreignKey: "user" });
+  users.hasMany(users_food_item, {
+    as: "users_food_items",
+    foreignKey: "user",
+  });
+  water_tracking.belongsTo(users, { as: "id_user", foreignKey: "id" });
+  users.hasOne(water_tracking, { as: "water_tracking", foreignKey: "id" });
+  weight_tracking.belongsTo(users, { as: "user_user", foreignKey: "user" });
+  users.hasMany(weight_tracking, {
+    as: "weight_trackings",
+    foreignKey: "user",
+  });
+  intake_food_item.belongsTo(users_food_item, {
+    as: "food_users_food_item",
+    foreignKey: "food",
+  });
+  users_food_item.hasMany(intake_food_item, {
+    as: "intake_food_items",
+    foreignKey: "food",
+  });
+  meal_component.belongsTo(users_food_item, {
+    as: "food_users_food_item",
+    foreignKey: "food",
+  });
+  users_food_item.hasMany(meal_component, {
+    as: "meal_components",
+    foreignKey: "food",
+  });
 
   return {
-    calorie_tracking,
     global_food_item,
     intake_food_item,
     meal,
