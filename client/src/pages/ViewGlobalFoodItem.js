@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import bananaImage from "../images/banana.jpg";
@@ -22,6 +22,7 @@ const imageMapping = {
 };
 
 const ViewGlobalFoodItem = () => {
+  let navigate = useNavigate();
   let { id } = useParams();
   const [foodObject, setFoodObject] = useState({});
   const [showConfirmation, setShowConfirmation] = useState(false);
@@ -35,7 +36,17 @@ const ViewGlobalFoodItem = () => {
   }, [id]);
 
   const handleDelete = () => {
-    // Delete logic goes here soon,.............
+    axios
+      .delete(`http://localhost:6001/globalfooditems/byId/${id}`)
+      .then((response) => {
+        // The item was successfully deleted
+        console.log("Item deleted successfully");
+        navigate("/globalfooditems");
+      })
+      .catch((error) => {
+        // Handle errors if the deletion fails
+        console.error("Error deleting item:", error);
+      });
   };
 
   const handleConfirmation = (confirm) => {
@@ -64,8 +75,14 @@ const ViewGlobalFoodItem = () => {
       <div>Protien:{foodObject.protien} </div>
       <div>Fibre:{foodObject.fibre} </div>
       <div>
-        <button>Update</button>
+        <Link to={`/globalupdateitem/${id}`}>
+          <button>Update</button>
+        </Link>
+
         <button onClick={() => setShowConfirmation(true)}>Delete</button>
+        <Link to="/globalfooditems">
+          <button>Back</button>
+        </Link>
       </div>
       {showConfirmation && (
         <div>

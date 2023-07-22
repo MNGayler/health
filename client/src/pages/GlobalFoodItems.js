@@ -41,8 +41,10 @@ const GlobalFoodItems = () => {
 
   return (
     <div>
-      <h1>List Global</h1>
-
+      <h1>Global Items</h1>
+      <Link to="/adminhome">
+        <button>Home</button>
+      </Link>
       <Link to="/globaladditem">
         <button>Add New Item</button>
       </Link>

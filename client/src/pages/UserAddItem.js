@@ -35,7 +35,7 @@ const UserAddItem = () => {
       if (response.data.error) {
         console.log("Error:", response.data.error);
       } else {
-        navigate("/userfooditems");
+        navigate("/usermyfooditems");
       }
     });
   };

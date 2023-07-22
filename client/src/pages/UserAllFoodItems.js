@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import aubergineImage from "../images/aubergine.jpg";
 import onionImage from "../images/onion.jpg";
@@ -61,16 +61,16 @@ const UserAllFoodItems = () => {
   const navigateToItem = (value) => {
     if (value.user) {
       // If the item has a "user" property, it's a user-specific item
-      navigate(`/viewuserfooditem/${value.id}`);
+      navigate(`/consumeuseritem/${value.id}`);
     } else {
       // Otherwise, it's a global item
-      navigate(`/viewglobalfooditem/${value.id}`);
+      navigate(`/consumeglobalitem/${value.id}`);
     }
   };
 
   return (
     <div>
-      <h1>This is User ALL food items - the items I created and Global items</h1>
+      <h1>This is User ALL food items - the items you created and Global items</h1>
       <div className="item-container">
         {listOfAllFoodItems.map((value, index) => {
           return (

@@ -17,6 +17,8 @@ DELETE /globalfooditems/byId/:id: Deletes a global food item by ID
 const express = require("express");
 const router = express.Router();
 const { global_food_item } = require("../models");
+const { requireAdmin } = require("../middlewares/RequireAdmin");
+
 
 
 //get all
@@ -38,7 +40,7 @@ router.get("/byId/:id", async (req, res) => {
 });
 
 // Add a row to the table
-router.post("/", async (req, res) => {
+router.post("/", requireAdmin, async (req, res) => {
   const globalItem = req.body;
   //using sequelizes' "create" - post globalItem into the global_food_item table
   await global_food_item.create(globalItem);
@@ -57,7 +59,7 @@ router.put("/byId/:id", async (req, res) => {
     if (!item) {
       return res.status(404).json({ error: "Item not found" });
     }
-        
+
     // Update the item with the new data
     await item.update(updatedData);
 
@@ -90,6 +92,5 @@ router.delete("/byId/:id", async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
-
 
 module.exports = router;

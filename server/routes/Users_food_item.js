@@ -1,29 +1,37 @@
 /* 
 This module contains the Api routes for USER food items, the items created by individual users for themselves.
 
-This module uses the user_food_item model for database operations. This database table is 
-populated only by users.
+This module uses the user_food_item and global_food_item models for database operations. 
+The database table, user_food_item, is populated only by users.
+The database table, global_food_item, is populated only by admins.
+
 
 This module contains the following routes:
 
-GET    /userfooditems: Retrieves a list of all global food items.
-POST   /userfooditems: Creates a new global food item.
-GET    /userfooditems/byId/:id: Retrieves a global food item by ID.
-PUT    /userfooditems/byId/:id: Updates a global food item by ID.
-DELETE /userfooditems/byId/:id: Deletes a global food item by ID
+GET    /userfooditems: Retrieves a list of all the users personal food items.
+POST   /userfooditems: Creates a new user food item.
+GET    /userfooditems/byId/:id: Retrieves a user food item by ID.
+PUT    /userfooditems/byId/:id: Updates a user food item by ID.
+DELETE /userfooditems/byId/:id: Deletes a user food item by ID
+GET    /userfooditems/all: returns the user's items and global items table to return both sets.
 
 */
 
-
 const express = require("express");
 const router = express.Router();
-const { users_food_item } = require("../models");
+const { users_food_item, global_food_item } = require("../models");
+const { validateToken } = require("../middlewares/AuthMiddleware");
 
 // GET ALL user Items
 
 router.get("/", async (req, res) => {
   try {
-    const listOfUserItems = await users_food_item.findAll();
+    const userId = req.header("userId");
+    const listOfUserItems = await users_food_item.findAll({
+      where: {
+        user: userId,
+      },
+    });
     res.json(listOfUserItems);
   } catch (error) {
     // Handle the error appropriately
@@ -45,7 +53,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-// GET(byID) get individual by using the primary key, id, from the url
+// GET(byID) get individual item, by using the primary key, id, from the url
 router.get("/byId/:id", async (req, res) => {
   try {
     const id = req.params.id;
@@ -99,5 +107,37 @@ router.delete("/byId/:id", async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
+
+//GET BOTH USER and GLOBAL items  
+// Each user will receive their personal user items and all global food items
+
+
+router.get("/all", async (req, res) => {
+  try {
+    const userId = req.header("userId");
+
+    // Fetch the user's personal items
+    const userItems = await users_food_item.findAll({
+      where: {
+        user: userId,
+      },
+    });
+
+    // Fetch all the global items
+    const globalItems = await global_food_item.findAll();
+
+    // Combine the userItems and globalItems arrays
+    const allItems = [...userItems, ...globalItems];
+
+    res.json(allItems);
+  } catch (error) {
+    // Handle the error appropriately
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+
+
 
 module.exports = router;

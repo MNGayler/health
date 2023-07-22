@@ -53,7 +53,16 @@ span {
 }
 
 
+.updateContainer{
+  display:flex;
+}
 
+.current {
+  background-color: greenyellow;
+}
 
+.new {
+  background-color: pink;
+}
 
 

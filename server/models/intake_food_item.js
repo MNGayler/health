@@ -23,6 +23,10 @@ module.exports = function(sequelize, DataTypes) {
         key: 'id'
       }
     },
+    weight: {
+      type: DataTypes.FLOAT,
+      allowNull: false
+    },
     date: {
       type: DataTypes.DATE,
       allowNull: false

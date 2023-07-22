@@ -6,6 +6,8 @@ const db = require("./models");
 app.use(express.json());
 app.use(cors());
 
+
+
 //ROUTERS
 const globalFoodItemsRouter = require("./routes/Global_food_items");
 app.use("/globalfooditems", globalFoodItemsRouter);
@@ -15,6 +17,9 @@ const usersRouter = require("./routes/Users");
 app.use("/auth", usersRouter);
 const adminRouter = require("./routes/Admin")
 app.use("/authadmin", adminRouter)
+const itemConsumptionRouter = require("./routes/ItemComsumption")
+app.use("/itemConsumption", itemConsumptionRouter)
+
 
 //create database tables if they dont exist and start server
 db.sequelize.sync().then(() => {
