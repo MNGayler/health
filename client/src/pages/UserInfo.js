@@ -17,6 +17,8 @@ const UserInfo = () => {
   const [currentId, setCurrentId] = useState(null);
   const [userHeight, setUserHeight] = useState(0);
   const [userSex, setUserSex] = useState(true);
+  //loading state for proper page rendering
+  const [loading, setLoading] = useState(true);
 
   // BMI calculation
   const calculateBMI = () => {
@@ -68,6 +70,7 @@ const UserInfo = () => {
 
   //For weight tracking including age
   useEffect(() => {
+   
     // Make the GET request to fetch the user information from the server
     axios
       .get("http://localhost:6001/weight/recent", { headers })
@@ -81,9 +84,13 @@ const UserInfo = () => {
         setCurrentAge(age);
         setCurrentId(id);
         setInitialAge(age);
+        // Set loading to false when data is fetched
+        setLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching user information:", error);
+        // Set loading to false 
+        setLoading(false);
       });
   }, []);
 
@@ -139,6 +146,10 @@ const UserInfo = () => {
     setInitialAge(currentAge);
   };
 
+  // Display a loading message while data is fetched
+  if (loading) {
+    return <p>Loading...</p>; 
+  }
   const formattedDate = formatDate(recentDate);
 
   return (

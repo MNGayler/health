@@ -15,12 +15,14 @@ const userFoodItemsRouter = require("./routes/Users_food_item");
 app.use("/userfooditems", userFoodItemsRouter);
 const usersRouter = require("./routes/Users");
 app.use("/auth", usersRouter);
-const adminRouter = require("./routes/Admin")
-app.use("/authadmin", adminRouter)
-const itemConsumptionRouter = require("./routes/ItemComsumption")
-app.use("/itemConsumption", itemConsumptionRouter)
-const weightRouter = require("./routes/Weight")
-app.use("/weight", weightRouter)
+const adminRouter = require("./routes/Admin");
+app.use("/authadmin", adminRouter);
+const itemConsumptionRouter = require("./routes/ItemComsumption");
+app.use("/itemConsumption", itemConsumptionRouter);
+const weightRouter = require("./routes/Weight");
+app.use("/weight", weightRouter);
+const waterRouter = require("./routes/Water");
+app.use("/water", waterRouter);
 
 
 //create database tables if they dont exist and start server

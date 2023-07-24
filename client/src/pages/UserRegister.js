@@ -15,6 +15,7 @@ const UserRegister = () => {
     height: "",
     sex: "male",
     weight: "",
+    age: "",
   };
 
   //validation schama to validate client form fields using yup
@@ -25,6 +26,7 @@ const UserRegister = () => {
     height: Yup.number().required(),
     sex: Yup.string().required(),
     weight: Yup.number().required(),
+    age: Yup.number().integer().required()
   });
 
   const onSubmit = (data) => {
@@ -54,13 +56,12 @@ const UserRegister = () => {
           <Field type="password" name="password" placeholder="your password" />
 
           <h3>
-            The following is required to track your weight, Body Mass Index,
-            BMI, etc.
+            The following is required to track your weight, Body Mass Index, etc.
           </h3>
 
           <div>
-            <label htmlFor="height">Height (in cm):</label>
-            <Field type="number" id="height" name="height" required />
+            <label htmlFor="height">Height (in m):</label>
+            <Field type="number" id="height" name="height" required placeholder="1.7" />
             <ErrorMessage name="height" component="span" />
           </div>
 
@@ -77,6 +78,12 @@ const UserRegister = () => {
             <label htmlFor="weight">Weight (in kg):</label>
             <Field type="number" id="weight" name="weight" required />
             <ErrorMessage name="weight" component="span" />
+          </div>
+
+          <div>
+            <label htmlFor="age">Age: </label>
+            <Field type="number" id="age" name="age" required />
+            <ErrorMessage name="age" component="span" />
           </div>
 
           <button type="submit">Register</button>

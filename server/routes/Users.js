@@ -7,7 +7,7 @@ const { sign } = require("jsonwebtoken");
 //Register a user
 
 router.post("/", async (req, res) => {
-  const { username, email, password, height, sex, weight } = req.body;
+  const { username, email, password, height, sex, weight, age } = req.body;
 
   try {
     const hash = await bcrypt.hash(password, 10);
@@ -36,12 +36,39 @@ router.post("/", async (req, res) => {
       sex:  sexBool ,
     });
 
+    const calcBMI = weight / (height * height)
+
+    // basal metabolic rate
+  const calculateRMR = () => {
+    //user is male
+    if (sex)
+      return (
+        88.362 +
+        13.397 * weight +
+        4.799 * height * 100 -
+        5.677 * age
+      );
+    // female
+    return (
+      447.593 +
+      9.247 * weight +
+      3.098 * height * 100 -
+      4.33 * age
+    );
+  };
+
+
+
+
+    const calcRMR = calculateRMR();
+
     await weight_tracking.create({
       user: user_id,
       date: new Date(),
       weight: weight,
-      BMI : 10,
-      RMR : 10,
+      BMI : calcBMI,
+      RMR : calcRMR,
+      age: age,
     });
 
     res.json({ success: true, user_id: user_id });
