@@ -78,17 +78,8 @@ router.post("/login", async (req, res) => {
   });
 });
 
+
+
+
 module.exports = router;
-// //REGISTER a user into users table
-// router.post("/", async (req, res) => {
-//   const { username, email, password } = req.body;
-//   bcrypt.hash(password, 10).then((hash) => {
-//     users.create({
-//       username: username,
-//       email: email,
-//       password: hash,
-//       is_admin: false,
-//     });
-//     res.json("user added");
-//   });
-// });
+

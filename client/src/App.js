@@ -21,6 +21,8 @@ import ConsumeGlobalItem from "./pages/ConsumeGlobalItem";
 import ConsumeUserItem from "./pages/ConsumeUserItem";
 import ViewConsumption from "./pages/ViewConsumption";
 import UserInfo from "./pages/UserInfo";
+import WaterTracking from "./pages/WaterTracking";
+import Charts from "./pages/Charts";
 
 function App() {
   return (
@@ -51,17 +53,20 @@ function App() {
             element={<ConsumeGlobalItem />}
           />
           <Route path="/consumeuseritem/:id" element={<ConsumeUserItem />} />
+          <Route path="/watertracking" element={<WaterTracking />} />
+
 
           {/* User routes */}
           <Route path="/userhome" element={<UserHome />} />
           <Route path="/userinfo" element={<UserInfo />} />
-
+          <Route path="/charts" element={<Charts />} />
+          
 
           {/* other routes */}
           <Route path="/" element={<Home />} />
           <Route path="/userlogin" element={<UserLogin />} />
           <Route path="/adminlogin" element={<AdminLogin />} />
-          
+
           <Route path="/adminhome" element={<AdminHome />} />
           <Route path="/registeradmin" element={<RegisterAdmin />} />
           <Route path="/userregister" element={<UserRegister />} />

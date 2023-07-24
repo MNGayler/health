@@ -30,6 +30,10 @@ module.exports = function(sequelize, DataTypes) {
     RMR: {
       type: DataTypes.FLOAT,
       allowNull: false
+    },
+    age: {
+      type: DataTypes.FLOAT,
+      allowNull: false
     }
   }, {
     sequelize,

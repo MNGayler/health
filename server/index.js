@@ -19,6 +19,8 @@ const adminRouter = require("./routes/Admin")
 app.use("/authadmin", adminRouter)
 const itemConsumptionRouter = require("./routes/ItemComsumption")
 app.use("/itemConsumption", itemConsumptionRouter)
+const weightRouter = require("./routes/Weight")
+app.use("/weight", weightRouter)
 
 
 //create database tables if they dont exist and start server
