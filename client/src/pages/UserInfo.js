@@ -8,44 +8,138 @@ const UserInfo = () => {
   const [userWeight, setUserWeight] = useState(0);
   const [recentWeight, setRecentWeight] = useState(0);
   const [currentBMI, setCurrentBMI] = useState(0);
-  const [currentAge,setCurrentAge] = useState(0);  
+  const [currentAge, setCurrentAge] = useState(0);
   const [dailyCalories, setDailyCalories] = useState(0);
-  const [recentDate, setRecentDate] = useState("")
+  const [recentDate, setRecentDate] = useState("");
+  //age seen by user
+  const [initialAge, setInitialAge] = useState(0);
+  // current field id - pk of the table
+  const [currentId, setCurrentId] = useState(null);
+  const [userHeight, setUserHeight] = useState(0);
+  const [userSex, setUserSex] = useState(true);
+
+  // BMI calculation
+  const calculateBMI = () => {
+    return recentWeight / (userHeight * userHeight);
+  };
+
+  // basal metabolic rate
+  const calculateRMR = () => {
+    //user is male
+    if (userSex)
+      return (
+        88.362 +
+        13.397 * recentWeight +
+        4.799 * userHeight * 100 -
+        5.677 * currentAge
+      );
+    // female
+    return (
+      447.593 +
+      9.247 * recentWeight +
+      3.098 * userHeight * 100 -
+      4.33 * currentAge
+    );
+  };
 
   // Function to format date in YYYY-MM-DD format
-const formatDate = (dateString) => {
-  const dateObject = new Date(dateString);
-  const year = dateObject.getFullYear();
-  const month = String(dateObject.getMonth() + 1).padStart(2, "0");
-  const day = String(dateObject.getDate()).padStart(2, "0");
-  return `${year}-${month}-${day}`;
-};
+  const formatDate = (dateString) => {
+    const dateObject = new Date(dateString);
+    const year = dateObject.getFullYear();
+    const month = String(dateObject.getMonth() + 1).padStart(2, "0");
+    const day = String(dateObject.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
 
+  //For height and sex
   useEffect(() => {
-    // Make the GET request to fetch the user information from the server
-    axios.get("http://localhost:6001/weight/recent", {headers}) 
+    axios
+      .get("http://localhost:6001/weight/height", { headers })
       .then((response) => {
-        const { recentWeight, date, BMI, RMR, age } = response.data;
-        // Update the state variables with the received data
-        setRecentWeight(recentWeight);
-        setRecentDate(date)
-        setCurrentBMI(BMI);
-        setDailyCalories(RMR);
-        setCurrentAge(age);
-
+        const { height, sex } = response.data;
+        //update the state variables
+        setUserHeight(height);
+        setUserSex(sex);
       })
       .catch((error) => {
         console.error("Error fetching user information:", error);
       });
   }, []);
 
-  const handleSubmit = (event) => {
+  //For weight tracking including age
+  useEffect(() => {
+    // Make the GET request to fetch the user information from the server
+    axios
+      .get("http://localhost:6001/weight/recent", { headers })
+      .then((response) => {
+        const { recentWeight, date, BMI, RMR, age, id } = response.data;
+        // Update the state variables with the received data
+        setRecentWeight(recentWeight);
+        setRecentDate(date);
+        setCurrentBMI(BMI);
+        setDailyCalories(RMR);
+        setCurrentAge(age);
+        setCurrentId(id);
+        setInitialAge(age);
+      })
+      .catch((error) => {
+        console.error("Error fetching user information:", error);
+      });
+  }, []);
+
+  // Function to handle weight submission
+  const handleWeightSubmit = (event) => {
     event.preventDefault();
 
-    console.log("New weight: ", userWeight);
+    const data = {
+      user: userId,
+      date: new Date(),
+      weight: userWeight,
+      BMI: 0,
+      RMR: 0,
+      age: currentAge,
+    };
+
+    // Calculate BMI and RMR based on the new weight
+    const updatedBMI = calculateBMI(recentWeight);
+    const updatedRMR = calculateRMR(recentWeight);
+
+    // Update the data object with the calculated BMI and RMR
+    data.BMI = updatedBMI;
+    data.RMR = updatedRMR;
+
+    axios.post("http://localhost:6001/weight", data).then((response) => {
+      if (response.data.error) {
+        console.log("Error:", response.data.error);
+      } else {
+        setRecentWeight(userWeight);
+        console.log("New weight: ", userWeight);
+      }
+    });
   };
 
-  const formattedDate = formatDate(recentDate)
+  // Function to handle age submission
+  const handleAgeSubmit = (event) => {
+    event.preventDefault();
+
+    const data = {
+      id: currentId,
+      age: currentAge,
+    };
+
+    axios
+      .put("http://localhost:6001/weight", data)
+      .then((response) => {
+        console.log("Age updated successfully!");
+      })
+      .catch((error) => {
+        console.error("Error updating age:", error);
+      });
+    console.log("New age: ", currentAge);
+    setInitialAge(currentAge);
+  };
+
+  const formattedDate = formatDate(recentDate);
 
   return (
     <div>
@@ -56,29 +150,36 @@ const formatDate = (dateString) => {
           <p>Last update: {formattedDate} </p>
           <p>Your most recent weight: {recentWeight} kg</p>
           <p>Your current BMI is : {currentBMI} </p>
-          <p>A rest you will burn approximately: {dailyCalories} calories per day</p>
+          <p>
+            At rest you will burn approximately(Basal metabolic rate):{" "}
+            {dailyCalories} calories per day
+          </p>
         </div>
         <div className="bottom-div">
           <h3>Update your weight</h3>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleWeightSubmit}>
             <label>
               New Weight:
               <input
                 type="number"
+                value={userWeight}
                 onChange={(e) => setUserWeight(e.target.value)}
-              /> kg
+              />{" "}
+              kg
             </label>
             <button type="submit">Submit</button>
           </form>
           <h3>Update your Age</h3>
-          <p>Your age is set to {currentAge} years</p>
-          <form onSubmit={handleSubmit}>
+          <p>Your age is set to {initialAge} years</p>
+          <form onSubmit={handleAgeSubmit}>
             <label>
               New Age:
               <input
                 type="number"
-                onChange={(e) => setUserWeight(e.target.value)}
-              /> years
+                value={currentAge}
+                onChange={(e) => setCurrentAge(e.target.value)}
+              />
+              years
             </label>
             <button type="submit">Submit</button>
           </form>
