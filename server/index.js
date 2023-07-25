@@ -23,6 +23,8 @@ const weightRouter = require("./routes/Weight");
 app.use("/weight", weightRouter);
 const waterRouter = require("./routes/Water");
 app.use("/water", waterRouter);
+const nutrientRouter = require("./routes/Nutrient");
+app.use("/nutrient", nutrientRouter)
 
 
 //create database tables if they dont exist and start server

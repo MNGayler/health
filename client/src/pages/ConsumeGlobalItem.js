@@ -123,7 +123,7 @@ const ConsumeGlobalItem = () => {
           </button>
         </p>
         <p>
-          Weight consumed:{" "}
+          Weight consumed:
           <input
             type="text"
             name="weightConsumed"
