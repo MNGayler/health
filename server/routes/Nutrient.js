@@ -5,8 +5,8 @@ const { nutrient_tracking } = require("../models");
 //Find a record for given user on given date
 router.get("/", async (req, res) => {
   try {
-    const headerId = req.header("userId");
-    const headerDate = req.header("date");
+    const headerId = req.query.userId;
+    const headerDate = req.query.date;
 
     const nutrientRow = await nutrient_tracking.findOne({
       where: {
@@ -24,16 +24,16 @@ router.get("/", async (req, res) => {
 
 // add new entry
 router.post("/", async (req, res) => {
-    try {
-      const nutrition = req.body;
-      // Using Sequelize's "create" - insert new nutrient_tracking record
-      const createdNutrition = await nutrient_tracking.create(nutrition);
-      res.json(createdNutrition);
-    } catch (error) {
-      console.error("Error adding new entry:", error);
-      res.status(500).json({ error: "Internal server error" });
-    }
-  });
+  try {
+    const nutrition = req.body;
+    // Using Sequelize's "create" - insert new nutrient_tracking record
+    const createdNutrition = await nutrient_tracking.create(nutrition);
+    res.json(createdNutrition);
+  } catch (error) {
+    console.error("Error adding new entry:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
 
 // update an entry using the pk from the previous GET request
 

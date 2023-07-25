@@ -64,7 +64,6 @@ const ConsumeGlobalItem = () => {
       user: userId,
       food: foodObject.id,
       weight: weightConsumed,
-      is_global: true,
       date: dateConsumed,
     };
 
@@ -73,11 +72,74 @@ const ConsumeGlobalItem = () => {
       .post("http://localhost:6001/itemconsumption/globalitem", consumptionData)
       .then((response) => {
         console.log(response.data);
-        navigate("/userallfooditems");
       })
       .catch((error) => {
         console.error("Error recording consumption:", error);
       });
+
+    //START OF NUTRIENT_TRACKING TABLE SECTION  
+
+    //calc nutrition consumed
+    let nutriEnergy = foodObject.energy * (weightConsumed / 100);
+    let nutriProtien = foodObject.protien * (weightConsumed / 100);
+    let nutriFibre = foodObject.fibre * (weightConsumed / 100);
+
+    // check if row for consumption date and this user exist in nutrient_tracking table
+    const params = { userId: userId, date: dateConsumed.toISOString() };
+
+    axios
+      .get("http://localhost:6001/nutrient", { params })
+      .then((response) => {
+        const nutrientRow = response.data;
+        if (nutrientRow) {
+          // If a row is found, update it with the new nutrition values
+          
+          nutriEnergy = nutriEnergy + nutrientRow.energy;
+          nutriProtien = nutriProtien + nutrientRow.protien;
+          nutriFibre = nutriFibre + nutrientRow.energy;
+
+          const nutriData = {
+            id: nutrientRow.id,
+            user: nutrientRow.user,
+            date: nutrientRow.date,
+            energy: nutriEnergy,
+            protien: nutriProtien,
+            fibre: nutriFibre,
+          };
+
+          axios
+            .put("http://localhost:6001/nutrient", nutriData)
+            .then((response) => {
+              console.log(response.data);
+              navigate("/userallfooditems");
+            })
+
+            .catch((error) => {
+              console.error("Error posting nutrient tracking data:", error);
+            });
+        } else {
+          // If the row is null, it means there's no existing record for the user and date
+
+          const nutriData = {
+            user: userId,
+            date: dateConsumed.toISOString(),
+            energy: nutriEnergy,
+            protien: nutriProtien,
+            fibre: nutriFibre,
+          };
+          axios
+            .post("http://localhost:6001/nutrient", nutriData)
+            .then((response) => {
+              console.log(response.data);
+              navigate("/userallfooditems");
+            });
+        }
+      })
+      .catch((error) => {
+        console.error("Error posting nutrient tracking data:", error);
+      });
+
+    //end handlesubmit
   };
 
   const getImageSource = () => {
