@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('meal', {
-    meal_id: {
+  return sequelize.define('global_item_intake', {
+    intake_id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -15,29 +15,25 @@ module.exports = function(sequelize, DataTypes) {
         key: 'user_id'
       }
     },
-    meal_name: {
-      type: DataTypes.STRING(45),
+    food: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'global_food_item',
+        key: 'id'
+      }
+    },
+    date: {
+      type: DataTypes.DATEONLY,
       allowNull: false
     },
-    energy: {
+    weight: {
       type: DataTypes.FLOAT,
-      allowNull: false
-    },
-    protien: {
-      type: DataTypes.FLOAT,
-      allowNull: false
-    },
-    fibre: {
-      type: DataTypes.FLOAT,
-      allowNull: false
-    },
-    image: {
-      type: DataTypes.STRING(255),
       allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'meal',
+    tableName: 'global_item_intake',
     timestamps: false,
     indexes: [
       {
@@ -45,14 +41,21 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "meal_id" },
+          { name: "intake_id" },
         ]
       },
       {
-        name: "meal_user_idx",
+        name: "global_intake_item_user_idx",
         using: "BTREE",
         fields: [
           { name: "user" },
+        ]
+      },
+      {
+        name: "global_intake_item_food_idx",
+        using: "BTREE",
+        fields: [
+          { name: "food" },
         ]
       },
     ]

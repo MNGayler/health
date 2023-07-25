@@ -43,6 +43,23 @@ const ConsumeGlobalItem = () => {
   }, [id]);
 
   const handleFormSubmit = () => {
+    // Validate weightConsumed and dateConsumed
+    if (
+      !weightConsumed ||
+      isNaN(Number(weightConsumed)) ||
+      Number(weightConsumed) <= 0
+    ) {
+      // Invalid or empty weightConsumed
+      console.error("Invalid weight consumed");
+      return;
+    }
+
+    if (!dateConsumed || isNaN(dateConsumed.getTime())) {
+      // Invalid or empty dateConsumed
+      console.error("Invalid date consumed");
+      return;
+    }
+
     const consumptionData = {
       user: userId,
       food: foodObject.id,
@@ -53,7 +70,7 @@ const ConsumeGlobalItem = () => {
 
     // Make the POST request to record the consumption
     axios
-      .post("http://localhost:6001/itemconsumption", consumptionData)
+      .post("http://localhost:6001/itemconsumption/globalitem", consumptionData)
       .then((response) => {
         console.log(response.data);
         navigate("/userallfooditems");
@@ -86,7 +103,7 @@ const ConsumeGlobalItem = () => {
         </Link>
       </div>
       <div>
-      <p>
+        <p>
           {isDatePickerOpen ? (
             <DatePicker
               onChange={(date) => {

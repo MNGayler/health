@@ -16,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     date: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       allowNull: false
     },
     weight: {
@@ -32,8 +32,8 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
     age: {
-      type: DataTypes.FLOAT,
-      allowNull: false
+      type: DataTypes.INTEGER,
+      allowNull: true
     }
   }, {
     sequelize,

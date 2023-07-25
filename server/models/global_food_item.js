@@ -26,7 +26,7 @@ module.exports = function(sequelize, DataTypes) {
     image: {
       type: DataTypes.STRING(255),
       allowNull: true
-    },
+    }
   }, {
     sequelize,
     tableName: 'global_food_item',

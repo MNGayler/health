@@ -34,7 +34,7 @@ module.exports = function(sequelize, DataTypes) {
     image: {
       type: DataTypes.STRING(255),
       allowNull: true
-    },
+    }
   }, {
     sequelize,
     tableName: 'users_food_item',

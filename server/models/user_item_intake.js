@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('intake_food_item', {
-    id: {
+  return sequelize.define('user_item_intake', {
+    intake_id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -23,21 +23,18 @@ module.exports = function(sequelize, DataTypes) {
         key: 'id'
       }
     },
+    date: {
+      type: DataTypes.DATEONLY,
+      allowNull: false
+    },
     weight: {
       type: DataTypes.FLOAT,
-      allowNull: false
-    },
-    date: {
-      type: DataTypes.DATE,
-      allowNull: false
-    },
-    is_global: {
-      type: DataTypes.TINYINT,
-      allowNull: false
+      allowNull: true
     }
+
   }, {
     sequelize,
-    tableName: 'intake_food_item',
+    tableName: 'user_item_intake',
     timestamps: false,
     indexes: [
       {
@@ -45,21 +42,21 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "id" },
+          { name: "intake_id" },
         ]
       },
       {
-        name: "item_intake_user_item_idx",
-        using: "BTREE",
-        fields: [
-          { name: "food" },
-        ]
-      },
-      {
-        name: "intake_item_user_id_idx",
+        name: "user_item_intake_user_idx",
         using: "BTREE",
         fields: [
           { name: "user" },
+        ]
+      },
+      {
+        name: "user_item_intake_food_idx",
+        using: "BTREE",
+        fields: [
+          { name: "food" },
         ]
       },
     ]

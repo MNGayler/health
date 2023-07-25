@@ -41,6 +41,23 @@ const ConsumeUserItem = () => {
   }, [id]);
 
   const handleFormSubmit = () => {
+    // Validate weightConsumed and dateConsumed
+    if (
+      !weightConsumed ||
+      isNaN(Number(weightConsumed)) ||
+      Number(weightConsumed) <= 0
+    ) {
+      // Invalid or empty weightConsumed
+      console.error("Invalid weight consumed");
+      return;
+    }
+
+    if (!dateConsumed || isNaN(dateConsumed.getTime())) {
+      // Invalid or empty dateConsumed
+      console.error("Invalid date consumed");
+      return;
+    }
+
     const consumptionData = {
       user: userId,
       food: foodObject.id,
@@ -51,7 +68,7 @@ const ConsumeUserItem = () => {
 
     // Make the POST request to record the consumption
     axios
-      .post("http://localhost:6001/itemconsumption", consumptionData)
+      .post("http://localhost:6001/itemconsumption/useritem", consumptionData)
       .then((response) => {
         console.log(response.data);
         navigate("/userallfooditems");
@@ -68,9 +85,9 @@ const ConsumeUserItem = () => {
     return aubergineImage; // fallback image
   };
 
-  return ( 
-  <div> 
-    <h2>{foodObject.food_name}</h2>
+  return (
+    <div>
+      <h2>{foodObject.food_name}</h2>
       <div className="global-image">
         <img src={getImageSource()} alt={foodObject.food_name} />
       </div>
@@ -84,7 +101,7 @@ const ConsumeUserItem = () => {
         </Link>
       </div>
       <div>
-      <p>
+        <p>
           {isDatePickerOpen ? (
             <DatePicker
               onChange={(date) => {
@@ -115,14 +132,8 @@ const ConsumeUserItem = () => {
         </p>
         <button onClick={handleFormSubmit}>Consume</button>
       </div>
-    
-    
-    
-    
-    
-    
-    
-    </div>);
+    </div>
+  );
 };
 
 export default ConsumeUserItem;

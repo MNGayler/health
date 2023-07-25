@@ -1,7 +1,7 @@
-import React from 'react'
+import React from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import aubergineImage from "../images/aubergine.jpg";
 import onionImage from "../images/onion.jpg";
@@ -30,24 +30,23 @@ const imageMapping = {
   orange: orangeImage,
   pear: pearImage,
   watermelon: watermelonImage,
-
 };
-
 
 // Get the user ID from session storage so we can send it with requests
 const userId = sessionStorage.getItem("userId");
 const headers = { userId: userId };
-
 
 const UserAllFoodItems = () => {
   let navigate = useNavigate();
   const [listOfAllFoodItems, setListOfAllFoodItems] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:6001/userfooditems/all", { headers }).then((response) => {
-      setListOfAllFoodItems(response.data);
-      console.log(response.data);
-    });
+    axios
+      .get("http://localhost:6001/userfooditems/all", { headers })
+      .then((response) => {
+        setListOfAllFoodItems(response.data);
+        console.log(response.data);
+      });
   }, []);
 
   const getImageSource = (image) => {
@@ -70,7 +69,12 @@ const UserAllFoodItems = () => {
 
   return (
     <div>
-      <h1>This is User ALL food items - the items you created and Global items</h1>
+      <h1>
+        This is User ALL food items - the items you created and Global items
+      </h1>
+      <Link to="/userfooditems">
+        <button>Back</button>
+      </Link>
       <div className="item-container">
         {listOfAllFoodItems.map((value, index) => {
           return (
@@ -82,11 +86,7 @@ const UserAllFoodItems = () => {
                 <div>Food name: {value.food_name}</div>
                 <div className="buttons">
                   {/* navigates to view chosen item with info and options */}
-                  <button
-                    onClick={() => navigateToItem(value)}
-                  >
-                    View
-                  </button>
+                  <button onClick={() => navigateToItem(value)}>View</button>
                 </div>
               </div>
             </div>
@@ -94,7 +94,7 @@ const UserAllFoodItems = () => {
         })}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default UserAllFoodItems
+export default UserAllFoodItems;

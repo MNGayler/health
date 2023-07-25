@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import {Link} from "react-router-dom"
 
 // Get the user ID from session storage so we can send it with requests
 const userId = sessionStorage.getItem("userId");
@@ -12,11 +13,6 @@ const formatDate = (dateString) => {
   const month = String(dateObject.getMonth() + 1).padStart(2, "0");
   const day = String(dateObject.getDate()).padStart(2, "0");
   return `${year}-${month}-${day}`;
-};
-
-const determineCreator = (boolean) => {
-  if (!boolean) return "USER";
-  return "GLOBAL";
 };
 
 const ViewConsumption = () => {
@@ -33,24 +29,29 @@ const ViewConsumption = () => {
 
   return (
     <div>
-      <h1>consumption record</h1>
-      {listOfConsumption.map((value, index) => {
-        // Format the date using the formatDate function above
-        const formattedDate = formatDate(value.date);
-        // Determine the creator of consumed item
-        const creator = determineCreator(value.is_global);
+      <h1>Consumption record</h1>
+      <Link to="/userfooditems">
+        <button>Back</button>
+      </Link>
+      {listOfConsumption.length === 0 ? (
+        <p>No consumption yet.</p>
+      ) : (
+        listOfConsumption.map((value, index) => {
+          const formattedDate = formatDate(value.date);
+          // Determine the creator of the consumed item based on the "type" property
+          const creator = value.type === "global" ? "GLOBAL" : "USER";
 
-        return (
-          <div key={index} className="item">
-            <div className="info">
-              <div>
-                Date: {formattedDate} Food: {value.food} weight: {value.weight}g
-                creator: {creator}
+          return (
+            <div key={index} className="item">
+              <div className="info">
+                <div>
+                  Date: {formattedDate} Food: {value.food} Weight:{value.weight}g Creator: {creator}
+                </div>
               </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })
+      )}
     </div>
   );
 };
