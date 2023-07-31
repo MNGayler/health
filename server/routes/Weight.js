@@ -45,7 +45,6 @@ router.put("/", async (req, res) => {
 
     // Update the age for the specific weight entry
     await weightEntry.update({ age });
-
     res.status(200).json({ message: "Age updated successfully" });
   } catch (err) {
     console.error("Error while updating age:", err);

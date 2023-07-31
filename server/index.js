@@ -25,6 +25,8 @@ const waterRouter = require("./routes/Water");
 app.use("/water", waterRouter);
 const nutrientRouter = require("./routes/Nutrient");
 app.use("/nutrient", nutrientRouter)
+const chartRouter = require("./routes/Charts");
+app.use("/charts", chartRouter);
 
 
 //create database tables if they dont exist and start server

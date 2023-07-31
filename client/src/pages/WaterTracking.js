@@ -34,18 +34,15 @@ const WaterTracking = () => {
     if (!todaysIntake) {
       const data = {
         user: userId,
-        date: new Date(),
         intake: intakeValue,
       };
-
-      console.log(data);
 
       axios.post("http://localhost:6001/water", data).then((response) => {
         if (response.data.error) {
           console.log("Error:", response.data.error);
         } else {
-          setTodaysIntake(newIntake);
-          console.log("New Intake: ", newIntake);
+          setTodaysIntake(intakeValue);
+          console.log("New Intake: ", intakeValue);
         }
       });
       // there is an intake already recorded for today
@@ -61,7 +58,7 @@ const WaterTracking = () => {
         .then((response) => {
           console.log("Water intake updated successfully!");
           setTodaysIntake(parseFloat(todaysIntake) + intakeValue);
-          console.log("Today's total: ", todaysIntake);
+          console.log("Today's total: ", parseFloat(todaysIntake) + intakeValue);
         })
         .catch((error) => {
           console.error("Error updating water intake:", error);
@@ -73,43 +70,45 @@ const WaterTracking = () => {
   const handleRapidSubmit = (event) => {
     event.preventDefault();
 
-    //There is no intake for today registered
+    
+  
+     //There is no intake for today registered create a data with id and 250ml water
     if (!todaysIntake) {
+
       const data = {
-        userId: userId,
-        date: new Date(),
+        user: userId,
         intake: 250,
       };
-      console.log(data);
-
-      axios.post("http://localhost:6001/water", data).then((response) => {
-        if (response.data.error) {
-          console.log("Error:", response.data.error);
-        } else {
-          setTodaysIntake(newIntake);
+  
+      axios
+        .post("http://localhost:6001/water", data)
+        .then((response) => {
+          setTodaysIntake(parseFloat(250));
           console.log("New Intake: ", 250);
-        }
-      });
-      // there is an intake already recorded for today
+        })
+        .catch((error) => {
+          console.error("Error adding water intake:", error);
+        });
     } else {
+      // If there is already a record, update the intake value with 250 ml
       const data = {
         userId: userId,
         intake: 250,
       };
-
+  
       axios
         .put("http://localhost:6001/water", data)
         .then((response) => {
           console.log("Water intake updated successfully!");
-          setTodaysIntake(todaysIntake + 250);
-          console.log("Today's total: ", todaysIntake);
+          setTodaysIntake(parseFloat(todaysIntake) + 250);
+          console.log("Today's total: ", parseFloat(todaysIntake) + 250);
         })
         .catch((error) => {
           console.error("Error updating water intake:", error);
         });
-      
     }
   };
+  
 
 
 

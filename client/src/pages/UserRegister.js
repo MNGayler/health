@@ -3,6 +3,8 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
+import "../styles/UserLogin.module.css";
+import Logo from "../images/Logo.png";
 
 const UserRegister = () => {
   let navigate = useNavigate();
@@ -23,10 +25,10 @@ const UserRegister = () => {
     username: Yup.string().min(2).max(15).required(),
     email: Yup.string().email().required(),
     password: Yup.string().min(5).max(20).required(),
-    height: Yup.number().required(),
+    height: Yup.number().required().min(0.5).max(3),
     sex: Yup.string().required(),
-    weight: Yup.number().required(),
-    age: Yup.number().integer().required()
+    weight: Yup.number().required().min(40).max(300),
+    age: Yup.number().integer().required().min(13).max(110),
   });
 
   const onSubmit = (data) => {
@@ -37,8 +39,11 @@ const UserRegister = () => {
   };
 
   return (
-    <div>
-      <h1>Register a user page</h1>
+    <div className="container">
+      <div className="logo">
+        <img src={Logo} alt="logo" />
+      </div>
+      <h3>Register User</h3>
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}
@@ -48,6 +53,7 @@ const UserRegister = () => {
           <label>Username: </label>
           <ErrorMessage name="username" component="span"></ErrorMessage>
           <Field name="username" placeholder="john123...." />
+
           <label>Email: </label>
           <ErrorMessage name="email" component="span"></ErrorMessage>
           <Field name="email" placeholder="you@yourmail.com" />
@@ -55,13 +61,20 @@ const UserRegister = () => {
           <ErrorMessage name="password" component="span"></ErrorMessage>
           <Field type="password" name="password" placeholder="your password" />
 
-          <h3>
-            The following is required to track your weight, Body Mass Index, etc.
-          </h3>
+          <p>
+            The following is required to track your weight, Body Mass Index,
+            etc.
+          </p>
 
           <div>
             <label htmlFor="height">Height (in m):</label>
-            <Field type="number" id="height" name="height" required placeholder="1.7" />
+            <Field
+              type="number"
+              id="height"
+              name="height"
+              required
+              placeholder="1.7"
+            />
             <ErrorMessage name="height" component="span" />
           </div>
 

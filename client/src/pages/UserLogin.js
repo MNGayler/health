@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
+import "../styles/UserLogin.module.css";
+import Logo from "../images/Logo.png";
 
 const UserLogin = () => {
   const [email, setEmail] = useState("");
@@ -27,16 +29,13 @@ const UserLogin = () => {
   };
 
   return (
-    <div>
-      <h1>This is user login</h1>
+    <div className="container">
+      <div className="logo">
+        <img src={Logo} alt="logo" />
+      </div>
+      <h1>User login</h1>
 
-      <Link to="/userhome">
-        <button>skip login</button>
-      </Link>
-      <Link to="/userregister">
-        <button>register</button>
-      </Link>
-      <span>above to be removed</span>
+            
       <p>email</p>
       <input
         type="text"
@@ -52,6 +51,7 @@ const UserLogin = () => {
         }}
       />
       <button onClick={login}>login</button>
+      <p>No account? <Link to="/userregister">register</Link> </p>
     </div>
   );
 };
