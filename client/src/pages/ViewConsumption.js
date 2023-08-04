@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {Link} from "react-router-dom"
+import UserNavbar from "../Components/Navbars/UserNav";
+import styles from "../styles/ViewConsumption.module.scss";
 
 // Get the user ID from session storage so we can send it with requests
 const userId = sessionStorage.getItem("userId");
@@ -28,8 +30,12 @@ const ViewConsumption = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Consumption record</h1>
+    <div className={styles["viewconsumption-container"]}>
+      <header>
+        <UserNavbar />
+      </header>
+
+      <h1>Consumption History</h1>
       <Link to="/userfooditems">
         <button>Back</button>
       </Link>

@@ -1,4 +1,4 @@
-import "./App.css";
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import GlobalFoodItems from "./pages/GlobalFoodItems";
 import Home from "./pages/Home";

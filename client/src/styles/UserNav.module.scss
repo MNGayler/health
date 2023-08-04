@@ -1,0 +1,30 @@
+.usernav-container {
+  background-color: #007bff;
+  width: 100%; /* Use the full width of the screen */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed; /* Set the position to fixed */
+  top: 0; /* Position it at the top */
+  left: 0; /* Position it at the left */
+  z-index: 999; /* Set the z-index to ensure it appears above other content */
+  
+}
+
+.usernav-userlinks {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  gap: 8px;
+  margin-right: 4px;
+}
+
+.usernav-welcome {
+  color: white;
+}
+
+.usernav-navlink {
+  text-decoration: none;
+  color: white;
+}

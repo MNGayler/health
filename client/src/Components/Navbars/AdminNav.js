@@ -1,7 +1,7 @@
 import React from 'react'
 import navLogo from "../../images/LogoWhiteonTransparent.png"
 import { Link } from 'react-router-dom'
-import "../../styles/navbar.module.css"
+
 
 const AdminNav = () => {
   return (

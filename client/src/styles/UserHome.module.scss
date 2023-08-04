@@ -1,0 +1,22 @@
+.userhome-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: #eae6e6;
+    text-align: center;
+    height: 400px;
+    border-radius: 3%;
+
+    .userhome-buttons{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        margin: 15px;
+        
+    }
+
+    h1 {
+        color: #007bff;
+    }
+}

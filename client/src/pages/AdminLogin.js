@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import styles from "../styles/AdminLogin.module.scss";
+import Logo from "../images/Logo.png";
 
 const AdminLogin = () => {
   let navigate = useNavigate();
@@ -19,12 +21,12 @@ const AdminLogin = () => {
   };
 
   return (
-    <div>
-      <h1>This is admin login</h1>
-      <Link to="/adminhome">
-        <button>skip login</button>
-      </Link>
-      <span>above to be removed</span>
+    <div className={styles["adminlogin-container"]}>
+      <div className={styles["adminlogin-logo"]}>
+        <img src={Logo} alt="logo" />
+      </div>
+      <h2>Admin Login</h2>
+      
       <p>email</p>
       <input
         type="text"
@@ -39,7 +41,8 @@ const AdminLogin = () => {
           setPassword(event.target.value);
         }}
       />
-      <button onClick={login}>login</button>
+      <button className={styles["adminlogin-button"]} onClick={login}>login</button>
+      <p>Not admin? <Link to="/">Return</Link></p>
     </div>
   );
 };

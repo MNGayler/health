@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
-import "../styles/UserLogin.module.css";
+import styles from "../styles/UserLogin.module.scss";
 import Logo from "../images/Logo.png";
 
 const UserLogin = () => {
@@ -20,8 +20,10 @@ const UserLogin = () => {
       sessionStorage.setItem("accessToken", response.data);
 
       // Decode the JWT to get the user ID and store it in session storage
+      
       const decodedToken = jwt_decode(accessToken);
-      const userId = decodedToken.id; // Get the user ID from the decoded JWT
+      // Get the user ID from the decoded JWT
+      const userId = decodedToken.id; 
       sessionStorage.setItem("userId", userId);
 
       navigate("/userhome");
@@ -29,20 +31,23 @@ const UserLogin = () => {
   };
 
   return (
-    <div className="container">
-      <div className="logo">
+    <div className={styles["userlogin-container"]}>
+      <div className={styles["userlogin-logo"]}>
         <img src={Logo} alt="logo" />
       </div>
       <h1>User login</h1>
+      
+      <div className={styles["userlogin-form"]}>
+        <p>email</p>
+        <input
+          type="text"
+          onChange={(event) => {
+            setEmail(event.target.value);
+          }}
+        />
+      </div>
 
-            
-      <p>email</p>
-      <input
-        type="text"
-        onChange={(event) => {
-          setEmail(event.target.value);
-        }}
-      />
+      <div className={styles["userlogin-form"]}>    
       <p>password</p>
       <input
         type="password"
@@ -50,8 +55,14 @@ const UserLogin = () => {
           setPassword(event.target.value);
         }}
       />
-      <button onClick={login}>login</button>
-      <p>No account? <Link to="/userregister">register</Link> </p>
+      </div>
+
+      <button className={styles["userlogin-button"]} onClick={login}>
+        login
+      </button>
+      <p>
+        No account? <Link to="/userregister">register</Link>{" "}
+      </p>
     </div>
   );
 };

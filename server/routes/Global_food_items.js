@@ -39,7 +39,7 @@ router.get("/byId/:id", async (req, res) => {
   }
 });
 
-// Add a row to the table
+// Add a row (global item) to the table
 router.post("/", requireAdmin, async (req, res) => {
   const globalItem = req.body;
   //using sequelizes' "create" - post globalItem into the global_food_item table

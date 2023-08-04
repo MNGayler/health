@@ -12,7 +12,6 @@ router.post("/", async (req, res) => {
   try {
     const hash = await bcrypt.hash(password, 10);
 
-
     // Create a new user instance using build()
     const newUser = users.build({
       username: username,
@@ -24,41 +23,28 @@ router.post("/", async (req, res) => {
     // Save the new user instance to the database
     await newUser.save();
     //get the auto incremented id for the following database inserts
-    const user_id = newUser.user_id; 
-    
+    const user_id = newUser.user_id;
+
     // switch "male" to true and "female" to false
     const sexBool = sex === "male";
 
-      // ... (Inserting personal_info and weight_tracking)
+    // ... (Inserting personal_info and weight_tracking)
     await personal_info.create({
       user: user_id,
       height: height,
-      sex:  sexBool ,
+      sex: sexBool,
     });
 
-    const calcBMI = weight / (height * height)
+    const calcBMI = weight / (height * height);
 
     // basal metabolic rate
-  const calculateRMR = () => {
-    //user is male
-    if (sex)
-      return (
-        88.362 +
-        13.397 * weight +
-        4.799 * height * 100 -
-        5.677 * age
-      );
-    // female
-    return (
-      447.593 +
-      9.247 * weight +
-      3.098 * height * 100 -
-      4.33 * age
-    );
-  };
-
-
-
+    const calculateRMR = () => {
+      //user is male
+      if (sex)
+        return 88.362 + 13.397 * weight + 4.799 * height * 100 - 5.677 * age;
+      // female
+      return 447.593 + 9.247 * weight + 3.098 * height * 100 - 4.33 * age;
+    };
 
     const calcRMR = calculateRMR();
 
@@ -66,8 +52,8 @@ router.post("/", async (req, res) => {
       user: user_id,
       date: new Date(),
       weight: weight,
-      BMI : calcBMI,
-      RMR : calcRMR,
+      BMI: calcBMI,
+      RMR: calcRMR,
       age: age,
     });
 
@@ -105,8 +91,20 @@ router.post("/login", async (req, res) => {
   });
 });
 
-
-
+// Get user for username for navbar presentation
+router.get("/name", async (req, res) => {
+  // Get user from header
+  const userId = req.header("userId");
+  try {
+    const navUsername = await users.findOne({ where: { user_id: userId } });
+    //check if user exists - if not return an error
+    if (!navUsername) return res.json({ error: "user not found" });
+    //return username
+    res.json({username: navUsername.username});
+  } catch (error) {
+    console.error("Error getting username:", error.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
 
 module.exports = router;
-

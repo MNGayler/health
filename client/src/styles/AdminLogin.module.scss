@@ -1,0 +1,36 @@
+body,
+html {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Center the container */
+.adminlogin-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh; 
+  background-color: #eae6e6; 
+  border: 6px solid #007bff;
+  border-radius: 5%;
+  
+
+  .adminlogin-logo img {
+    max-width: 100%;
+    max-height: 200px;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    border-bottom: 6px solid #007bff;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 30px;
+  }
+
+  .adminlogin-button {
+    margin-top: 10px;
+  }
+}
