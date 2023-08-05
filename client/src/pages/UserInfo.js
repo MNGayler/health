@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import UserNavbar from "../Components/Navbars/UserNav";
+import styles from "../styles/UserInfo.module.scss";
 
 const userId = sessionStorage.getItem("userId");
 const headers = { userId: userId };
@@ -153,8 +156,15 @@ const UserInfo = () => {
   const formattedDate = formatDate(recentDate);
 
   return (
-    <div>
+    <div className={styles["userinfo-container"]}>
+    <header>
+      <UserNavbar />
+    </header>
+
       <h1>User Information</h1>
+      <Link to="/userhome">
+        <button className={styles["userinfo-button"]}>Home</button>
+      </Link>
       <div className="container">
         <div className="top-div">
           <h3>Current information</h3>
@@ -178,7 +188,7 @@ const UserInfo = () => {
               />{" "}
               kg
             </label>
-            <button type="submit">Submit</button>
+            <button className={styles["userinfo-button"]} type="submit">Submit</button>
           </form>
           <h3>Update your Age</h3>
           <p>Your age is set to {initialAge} years</p>
@@ -192,7 +202,7 @@ const UserInfo = () => {
               />
               years
             </label>
-            <button type="submit">Submit</button>
+            <button className={styles["userinfo-button"]} type="submit">Submit</button>
           </form>
         </div>
       </div>

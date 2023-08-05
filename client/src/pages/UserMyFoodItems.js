@@ -2,6 +2,8 @@ import React from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import UserNavbar from "../Components/Navbars/UserNav";
+import styles from "../styles/UserMyItems.module.scss";
 
 import aubergineImage from "../images/aubergine.jpg";
 import onionImage from "../images/onion.jpg";
@@ -28,10 +30,12 @@ const UserMyFoodItems = () => {
   const [listOfUserFoodItems, setListOfUserFoodItems] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:6001/userfooditems", { headers }).then((response) => {
-      setListOfUserFoodItems(response.data);
-      console.log(response.data);
-    });
+    axios
+      .get("http://localhost:6001/userfooditems", { headers })
+      .then((response) => {
+        setListOfUserFoodItems(response.data);
+        console.log(response.data);
+      });
   }, []);
 
   const getImageSource = (image) => {
@@ -43,39 +47,56 @@ const UserMyFoodItems = () => {
 
   return (
     <div>
-      <h1>My food items</h1>
-      <Link to="/userfooditems">
-        <button>back</button>
-      </Link>
-      <div>
-      <Link to="/useradditem">
-        <button>Add New Item</button>
-      </Link>
-      </div>
-      <h3> Select the item VIEW button for: NUTRITIONAL INFORMATION, to UPDATE or to DELETE</h3>
-      <div className="item-container">
-        {listOfUserFoodItems.map((value, index) => {
-          return (
-            <div key={index} className="item">
-              <div>
-                <img src={getImageSource(value.image)} alt={value.food_name} />
-              </div>
-              <div className="info">
-                <div>Food name: {value.food_name}</div>
-                <div className="buttons">
-                  {/* navigates to view chosen item with info and options */}
-                  <button
-                    onClick={() => {
-                      navigate(`/viewuserfooditem/${value.id}`);
-                    }}
-                  >
-                    View
-                  </button>
+      <header>
+        <UserNavbar />
+      </header>
+
+      <div className={styles["usermyitems-container"]}>
+        <h1 className={styles["usermyitems-title"]}>My food items</h1>
+
+        <Link to="/userfooditems">
+          <button>back</button>
+        </Link>
+        <div>
+          <Link to="/useradditem">
+            <button>Add New Item</button>
+          </Link>
+        </div>
+        <h3>
+          {" "}
+          Select the item VIEW button for: NUTRITIONAL INFORMATION, to UPDATE or
+          to DELETE
+        </h3>
+
+        <div className={styles["usermyitems-itemcontainer"]}>
+          {listOfUserFoodItems.map((value, index) => {
+            return (
+              <div key={index}>
+                <div>
+                  <img
+                    className={styles["usermyitems-image"]}
+                    src={getImageSource(value.image)}
+                    alt={value.food_name}
+                  />
+                </div>
+                <div>
+                  <div>Item: {value.food_name}</div>
+                  <div>
+                    {/* navigates to view chosen item with info and options */}
+                    <button
+                      className={styles["usermyitems-button"]}
+                      onClick={() => {
+                        navigate(`/viewuserfooditem/${value.id}`);
+                      }}
+                    >
+                      View
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     </div>
   );

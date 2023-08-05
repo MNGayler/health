@@ -2,6 +2,8 @@ import React from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import UserNavbar from "../Components/Navbars/UserNav";
+import styles from "../styles/UserAllItems.module.scss";
 
 import aubergineImage from "../images/aubergine.jpg";
 import onionImage from "../images/onion.jpg";
@@ -69,33 +71,43 @@ const UserAllFoodItems = () => {
 
   return (
     <div>
-      <h1>
-        This is User ALL food items - the items you created and Global items
-      </h1>
-      <Link to="/userfooditems">
-        <button>Back</button>
-      </Link>
-      <div className="item-container">
-        {listOfAllFoodItems.map((value, index) => {
-          return (
-            <div key={index} className="item">
-              <div>
-                <img src={getImageSource(value.image)} alt={value.food_name} />
-              </div>
-              <div className="info">
-                <div>Food name: {value.food_name}</div>
-                <div className="buttons">
-                  {/* navigates to view chosen item with info and options */}
-                  <button onClick={() => navigateToItem(value)}>View</button>
+      <header>
+        <UserNavbar />
+      </header>
+
+      <div className={styles["userallitems-container"]}>
+        <h1>
+          All Food items - select to consume!
+        </h1>
+        <Link to="/userfooditems">
+          <button>Back</button>
+        </Link>
+        <div className={styles["userallitems-itemcontainer"]}>
+          {listOfAllFoodItems.map((value, index) => {
+            return (
+              <div key={index} className="item">
+                <div>
+                  <img
+                    className={styles["userallitems-image"]}
+                    src={getImageSource(value.image)}
+                    alt={value.food_name}
+                  />
+                </div>
+                <div className="info">
+                  <div>Food name: {value.food_name}</div>
+                  <div className="buttons">
+                    {/* navigates to view chosen item with info and options */}
+                    <button onClick={() => navigateToItem(value)}>View</button>
+                  </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
-        {/* Handle empty userItems scenario */}
-        {listOfAllFoodItems.length === 0 && (
-          <div>No items found for this user.</div>
-        )}
+            );
+          })}
+          {/* Handle empty userItems scenario */}
+          {listOfAllFoodItems.length === 0 && (
+            <div>No items found for this user.</div>
+          )}
+        </div>
       </div>
     </div>
   );

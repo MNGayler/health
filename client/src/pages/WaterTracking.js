@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import UserNavbar from "../Components/Navbars/UserNav";
+import styles from "../styles/WaterTracking.module.scss";
+
 
 const WaterTracking = () => {
   // Fetch userId from sessionStorage
@@ -113,10 +116,13 @@ const WaterTracking = () => {
 
 
   return (
-    <div>
-      <h1> water tracking</h1>
+    <div className={styles["watertracking-container"]}>
+    <header>
+      <UserNavbar />
+    </header>
+      <h1>Water Tracking</h1>
       <Link to="/userhome">
-        <button>Back</button>
+        <button>Home</button>
       </Link>
 
       <div>

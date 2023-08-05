@@ -35,7 +35,7 @@ const UserNav = () => {
           <h3>Welcome: {username}</h3>
         </div>
         <div className={styles["usernav-userlinks"]}>
-          <Link className={styles["usernav-navlink"]} to="/">
+          <Link className={styles["usernav-navlink"]} to="/userhome">
             Home
           </Link>
           <Link className={styles["usernav-navlink"]} to="/userfooditems">

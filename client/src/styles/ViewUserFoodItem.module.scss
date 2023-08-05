@@ -1,0 +1,61 @@
+body,
+html {
+  height: 100vh;
+  margin: 0;
+}
+
+.viewuserfooditem-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  background-color: #eae6e6;
+  text-align: center;
+  border-radius: 3%;
+  width: 800px;
+  max-width: 100%;
+  margin: 50px auto;
+  margin-top: 80px;
+  margin-bottom: 50px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.viewuserfooditem-itemcontainer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-grow: 1;
+  }
+
+.viewuserfooditem-image {
+  height: 150px;
+  border: 2px solid #007bff;
+  margin-bottom: 3px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.viewuserfooditem-title {
+    margin-top: -3px;
+    margin-bottom: 3px;
+}
+
+.viewuserfooditem-button{
+    margin: 3px;
+}
+
+.viewuserfooditem-buttondelete{
+    margin: 3px;
+    background-color: #ff003c;
+    /* Hover effect */
+    &:hover {
+        background-color: #b30000;
+        transform: scale(1.1);
+      }
+
+      /* Active effect */
+      &:active {
+        transform: scale(0.9);
+      }
+}

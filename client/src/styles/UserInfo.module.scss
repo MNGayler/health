@@ -1,0 +1,28 @@
+body,
+html {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.userinfo-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: #eae6e6;
+    text-align: center;
+    height: 600px;
+    border-radius: 3%;
+    width: 800px
+}
+
+.userinfo-button{
+    margin-left: 10px;
+    margin-bottom: -5px;
+}
+
+h1, h3 {
+    color: #007bff;
+}
