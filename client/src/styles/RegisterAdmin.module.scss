@@ -1,0 +1,80 @@
+body,
+html {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.registeradmin-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: #eae6e6;
+  text-align: center;
+  height: 400px;
+  width: 800px;
+  border-radius: 5%;
+  
+}
+
+.registeradmin-title{
+  margin-bottom: 0;
+
+}
+
+.registeradmin-button{
+  margin-top: 10px;
+  margin-left: 280px;
+}
+
+fieldset {
+  margin-top: 15px;
+}
+
+registeradmin-fields{
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+
+
+
+.registeradmin-textbox {
+  border: none;
+  border-bottom: 1px solid black;
+  background-color: #faf4f4;
+  margin: 2px;
+}
+
+
+
+button {
+  font-size: 18px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  margin-bottom: 50px;
+
+  /* Hover effect */
+  &:hover {
+    background-color: #0056b3;
+    transform: scale(1.1);
+  }
+
+  /* Active effect */
+  &:active {
+    transform: scale(0.9);
+  }
+}
+
+span {
+  color: red;
+}

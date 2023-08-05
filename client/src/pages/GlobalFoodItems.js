@@ -2,6 +2,8 @@ import React from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import styles from "../styles/GlobalFoodItems.module.scss";
+import AdminNav from "../Components/Navbars/AdminNav";
 
 import bananaImage from "../images/banana.jpg";
 import blueberryImage from "../images/blueberry.jpg";
@@ -40,37 +42,58 @@ const GlobalFoodItems = () => {
   };
 
   return (
-    <div>
-      <h1>Global Items</h1>
-      <Link to="/adminhome">
-        <button>Home</button>
-      </Link>
-      <Link to="/globaladditem">
-        <button>Add New Item</button>
-      </Link>
-      <div className="item-container">
-        {listOfGlobalFoodItems.map((value, key) => {
-          return (
-            <div className="item">
-              <div>
-                <img src={getImageSource(value.image)} alt={value.food_name} />
-              </div>
-              <div className="info">
-                <div>Food Name: {value.food_name}</div>
-                <div className="buttons">
-                  {/* navigates to view chosen item with info and options */}
-                  <button
-                    onClick={() => {
-                      navigate(`/viewglobalfooditem/${value.id}`);
-                    }}
-                  >
-                    View
-                  </button>
+    <div className={styles["globalfooditems-container"]}>
+      <header>
+        <AdminNav />
+      </header>
+
+      <div >
+        <h1 className={styles["globalfooditems-title"]}>Global Items</h1>
+
+        <Link to="/adminhome">
+          <button>Back</button>
+        </Link>
+
+        <div>
+          <Link to="/globaladditem">
+            <button>Add New Item</button>
+          </Link>
+        </div>
+
+        <h3>       
+          Select the item VIEW button for: NUTRITIONAL INFORMATION, to UPDATE or
+          to DELETE
+        </h3>
+
+        <div className={styles["globalfooditems-itemcontainer"]}>
+          {listOfGlobalFoodItems.map((value, key) => {
+            return (
+              <div key={key}>
+                <div>
+                  <img
+                    className={styles["globalfooditems-image"]}
+                    src={getImageSource(value.image)}
+                    alt={value.food_name}
+                  />
+                </div>
+                <div >
+                  <div>Food Name: {value.food_name}</div>
+                  <div >
+                    {/* navigates to view chosen item with info and options */}
+                    <button
+                      className={styles["globalfooditems-button"]}
+                      onClick={() => {
+                        navigate(`/viewglobalfooditem/${value.id}`);
+                      }}
+                    >
+                      View
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     </div>
   );

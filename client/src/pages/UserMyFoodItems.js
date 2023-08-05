@@ -57,13 +57,14 @@ const UserMyFoodItems = () => {
         <Link to="/userfooditems">
           <button>back</button>
         </Link>
+
         <div>
           <Link to="/useradditem">
             <button>Add New Item</button>
           </Link>
         </div>
-        <h3>
-          {" "}
+
+        <h3>       
           Select the item VIEW button for: NUTRITIONAL INFORMATION, to UPDATE or
           to DELETE
         </h3>

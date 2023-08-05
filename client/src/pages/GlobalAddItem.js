@@ -3,6 +3,8 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import AdminNavbar from "../Components/Navbars/AdminNav";
+import styles from "../styles/GlobalAddItem.module.scss";
 
 const GlobalAddItem = () => {
   let navigate = useNavigate();
@@ -46,55 +48,74 @@ const GlobalAddItem = () => {
   };
 
   return (
-    <div className="addItemContainer">
-      This is add item global
+    <div className={styles["globaladditem-container"]}>
+      <header>
+        <AdminNavbar />
+      </header>
+      <h1>Add Item</h1>
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}
         validationSchema={validationSchema}
       >
-        <Form className="formContainer">
-          <label>Item Name: </label>
-          <ErrorMessage name="food_name" component="span" />
-          <Field
-            id="inputAddItem"
-            name="food_name"
-            placeholder="e.g. Apple"
-            autoComplete="off"
-          />
-          <label>Energy (cals/100g): </label>
-          <ErrorMessage name="energy" component="span" />
-          <Field
-            id="inputAddItem"
-            name="energy"
-            placeholder="e.g. 10"
-            autoComplete="off"
-          />
-          <label>Protien (mg/100g): </label>
-          <ErrorMessage name="protien" component="span" />
-          <Field
-            id="inputAddItem"
-            name="protien"
-            placeholder="e.g. 10"
-            autoComplete="off"
-          />
-          <label>Fibre (mg/100g): </label>
-          <ErrorMessage name="fibre" component="span" />
-          <Field
-            id="inputAddItem"
-            name="fibre"
-            placeholder="e.g. 10"
-            autoComplete="off"
-          />
-          <label>Image: </label>
-          <ErrorMessage name="image" component="span" />
-          <Field
-            id="inputAddItem"
-            name="image"
-            placeholder="path to image"
-            autoComplete="off"
-          />
-          <button type="submit">Add Item</button>
+        <Form>
+          <div className={styles["globaladditems-form-group"]}>
+            <label>Item Name: </label>
+            <ErrorMessage name="food_name" component="span" />
+            <Field
+              id="inputAddItem"
+              name="food_name"
+              placeholder="e.g. Apple"
+              autoComplete="off"
+            />
+          </div>
+          <div className={styles["globaladditems-form-group"]}>
+            <label>Energy (cals/100g): </label>
+            <ErrorMessage name="energy" component="span" />
+            <Field
+              id="inputAddItem"
+              name="energy"
+              placeholder="e.g. 10"
+              autoComplete="off"
+            />
+          </div>
+          <div className={styles["globaladditems-form-group"]}>
+            <label>Protien (mg/100g): </label>
+            <ErrorMessage name="protien" component="span" />
+            <Field
+              id="inputAddItem"
+              name="protien"
+              placeholder="e.g. 10"
+              autoComplete="off"
+            />
+          </div>
+          <div className={styles["globaladditems-form-group"]}>
+            <label>Fibre (mg/100g): </label>
+            <ErrorMessage name="fibre" component="span" />
+            <Field
+              id="inputAddItem"
+              name="fibre"
+              placeholder="e.g. 10"
+              autoComplete="off"
+            />
+          </div>
+          <div className={styles["globaladditems-form-group"]}>
+            <label>Image: </label>
+            <ErrorMessage name="image" component="span" />
+            <Field
+              id="inputAddItem"
+              name="image"
+              placeholder="path to image"
+              autoComplete="off"
+            />
+          </div>
+
+          <button
+            className={styles["globaladditems-form-button"]}
+            type="submit"
+          >
+            Add Item
+          </button>
         </Form>
       </Formik>
     </div>

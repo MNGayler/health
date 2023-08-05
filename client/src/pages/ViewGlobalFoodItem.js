@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import React from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import axios from "axios"
+import AdminNav from "../Components/Navbars/AdminNav";
+import styles from '../styles/ViewGlobalFoodItem.module.scss'
 
 import bananaImage from "../images/banana.jpg";
 import blueberryImage from "../images/blueberry.jpg";
@@ -64,31 +66,34 @@ const ViewGlobalFoodItem = () => {
   };
 
   return (
-    <div>
-      <h1>Veiwing item with id: {id}</h1>
-      <h2>{foodObject.food_name}</h2>
+    <div className={styles["viewglobalfooditem-container"]}>
+      <header>
+        <AdminNav />
+      </header>
+      <h1>Global Item</h1>
+      
       <div className="global-image">
-        <img src={getImageSource()} alt={foodObject.food_name} />
+        <img className={styles["viewglobalfooditem-image"]} src={getImageSource()} alt={foodObject.food_name} />
       </div>
-      <div>food_name:{foodObject.food_name} </div>
+      <h2>{foodObject.food_name}</h2>
       <div>Energy:{foodObject.energy} </div>
       <div>Protien:{foodObject.protien} </div>
       <div>Fibre:{foodObject.fibre} </div>
       <div>
         <Link to={`/globalupdateitem/${id}`}>
-          <button>Update</button>
+          <button className={styles["viewglobalfooditem-button"]} >Update</button>
         </Link>
 
-        <button onClick={() => setShowConfirmation(true)}>Delete</button>
+        <button className={styles["viewglobalfooditem-button"]} onClick={() => setShowConfirmation(true)}>Delete</button>
         <Link to="/globalfooditems">
-          <button>Back</button>
+          <button className={styles["viewglobalfooditem-button"]}>Back</button>
         </Link>
       </div>
       {showConfirmation && (
         <div>
           <p>Are you sure you want to delete this item?</p>
-          <button onClick={() => handleConfirmation(true)}>Yes</button>
-          <button onClick={() => handleConfirmation(false)}>No</button>
+          <button className={styles["viewglobalfooditem-buttondelete"]} onClick={() => handleConfirmation(true)}>Yes</button>
+          <button className={styles["viewglobalfooditem-button"]} onClick={() => handleConfirmation(false)}>No</button>
         </div>
       )}
     </div>

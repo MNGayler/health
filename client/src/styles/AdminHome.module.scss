@@ -1,0 +1,24 @@
+.adminhome-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: #eae6e6;
+    text-align: center;
+    height: 400px;
+    width: 800px;
+    
+    border-radius: 5%;
+
+    .adminhome-buttons{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 45px;
+        margin: 15px; 
+        
+    }
+
+    h1 {
+        color: #007bff;
+    }
+}

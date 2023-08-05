@@ -3,6 +3,8 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import AdminNavbar from "../Components/Navbars/AdminNav";
+import styles from "../styles/RegisterAdmin.module.scss";
 
 const RegisterAdmin = () => {
   let navigate = useNavigate();
@@ -29,28 +31,55 @@ const RegisterAdmin = () => {
   };
 
   return (
-    <div>
-      <h1>Register an admin page</h1>
+    <div className={styles["registeradmin-container"]}>
+      <header>
+        <AdminNavbar />
+      </header>
+
+      <h1 className={styles["registeradmin-title"]} >Register Admin</h1>
+
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}
         validationSchema={validationSchema}
       >
         <Form>
-          <label>Username: </label>
-          <ErrorMessage name="username" component="span"></ErrorMessage>
-          <Field name="username" placeholder="john123...." />
-          <label>Email: </label>
-          <ErrorMessage name="email" component="span"></ErrorMessage>
-          <Field name="email" placeholder="you@yourmail.com" />
-          <label>Password: </label>
-          <ErrorMessage name="password" component="span"></ErrorMessage>
-          <Field type="password" name="password" placeholder="your password" />
-
-          <button type="submit">Register</button>
+          <div className="registeradmin-fields">
+            <div>
+              <label>Username: </label>
+              <ErrorMessage name="username" component="span"></ErrorMessage>
+              <Field
+                className={styles["registeradmin-textbox"]}
+                name="username"
+                placeholder="john123...."
+              />
+            </div>
+            <div>
+              <label>Email: </label>
+              <ErrorMessage name="email" component="span"></ErrorMessage>
+              <Field
+                className={styles["registeradmin-textbox"]}
+                name="email"
+                placeholder="you@yourmail.com"
+              />
+            </div>
+            <div>
+              <label>Password: </label>
+              <ErrorMessage name="password" component="span"></ErrorMessage>
+              <Field
+                className={styles["registeradmin-textbox"]}
+                type="password"
+                name="password"
+                placeholder="your password"
+              />
+            </div>
+          </div>
+          <button className={styles["registeradmin-button"]} type="submit">
+            Register
+          </button>
         </Form>
       </Formik>
-      <span>change the route to admin then delete this</span>
+      
     </div>
   );
 };

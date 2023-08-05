@@ -43,6 +43,8 @@ const UserRegister = () => {
       <div className={styles["userregister-logo"]}>
         <img src={Logo} alt="logo" />
       </div>
+
+      
       <h3>User Registration</h3>
       <Formik
         initialValues={initialValues}

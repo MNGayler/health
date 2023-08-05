@@ -4,6 +4,8 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import AdminNavbar from "../Components/Navbars/AdminNav";
+import styles from "../styles/GlobalUpdateItem.module.scss";
 
 const GlogalUpdateItem = () => {
   let navigate = useNavigate();
@@ -50,45 +52,62 @@ const GlogalUpdateItem = () => {
   };
 
   return (
-    <div>
+    <div className={styles["globalupdateitem-container"]}>
+      <header>
+        <AdminNavbar />
+      </header>
+
+      <h1 className={styles["globalupdateitem-title"]}>Update Item</h1>
       <Link to={`/viewglobalfooditem/${id}`}>
-        <button>Back</button>
+        <button className={styles["globalupdateitem-backbutton"]}>Back</button>
       </Link>
-      <h1>update this item</h1>
-      <div className="updateContainer">
-        <div className="current">
-          <h2>The item currently:</h2>
+
+      <div className={styles["globalupdateitem-rightleftcontainer"]}>
+        <div className={styles["globalupdateitem-left"]}>
+          <h3>Current Values:</h3>
           <h2>{foodObject.food_name}</h2>
-          <div>food_name:{foodObject.food_name} </div>
+
           <div>Energy:{foodObject.energy} </div>
           <div>Protien:{foodObject.protien} </div>
           <div>Fibre:{foodObject.fibre} </div>
+          <div>Image:{foodObject.image} </div>
         </div>
-        <div className="new">
-          <h1>You will change the item to the following:</h1>
+
+        <div className={styles["globalupdateitem-right"]}>
+          <h3>Changes:</h3>
           <Formik
             initialValues={initialValues}
             enableReinitialize
             onSubmit={onSubmit}
             validationSchema={validationSchema}
           >
-            <Form className="formContainer">
-              <label>Item Name: </label>
-              <ErrorMessage name="food_name" component="span" />
-              <Field id="inputAddItem" name="food_name" autoComplete="off" />
-              <label>Energy (cals/100g): </label>
-              <ErrorMessage name="energy" component="span" />
-              <Field id="inputAddItem" name="energy" autoComplete="off" />
-              <label>Protien (mg/100g): </label>
-              <ErrorMessage name="protien" component="span" />
-              <Field id="inputAddItem" name="protien" autoComplete="off" />
-              <label>Fibre (mg/100g): </label>
-              <ErrorMessage name="fibre" component="span" />
-              <Field id="inputAddItem" name="fibre" autoComplete="off" />
-              <label>Image: </label>
-              <ErrorMessage name="image" component="span" />
-              <Field id="inputAddItem" name="image" autoComplete="off" />
-              <button type="submit">Update Item</button>
+            <Form className={styles["globalupdateitem-form"]}>
+              <div className={styles["form-group"]}>
+                <label>Item Name: </label>
+                <ErrorMessage name="food_name" component="span" />
+                <Field id="inputAddItem" name="food_name" autoComplete="off" />
+              </div>
+              <div className={styles["form-group"]}>
+                <label>Energy (cals/100g): </label>
+                <ErrorMessage name="energy" component="span" />
+                <Field id="inputAddItem" name="energy" autoComplete="off" />
+              </div>
+              <div className={styles["form-group"]}>
+                <label>Protien (mg/100g): </label>
+                <ErrorMessage name="protien" component="span" />
+                <Field id="inputAddItem" name="protien" autoComplete="off" />
+              </div>
+              <div className={styles["form-group"]}>
+                <label>Fibre (mg/100g): </label>
+                <ErrorMessage name="fibre" component="span" />
+                <Field id="inputAddItem" name="fibre" autoComplete="off" />
+              </div>
+              <div className={styles["form-group"]}>
+                <label>Image: </label>
+                <ErrorMessage name="image" component="span" />
+                <Field id="inputAddItem" name="image" autoComplete="off" />
+              </div>
+              <button className={styles["globalupdateitem-button"]} type="submit">Update Item</button>
             </Form>
           </Formik>
         </div>
