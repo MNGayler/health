@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import {
   BarChart,
@@ -9,6 +10,8 @@ import {
   Legend,
   CartesianGrid,
 } from "recharts";
+import UserNavbar from "../Components/Navbars/UserNav";
+import styles from "../styles/Charts.module.scss";
 
 const Charts = () => {
   const [waterIntakes, setWaterIntakes] = useState([]);
@@ -86,52 +89,65 @@ const Charts = () => {
   }));
 
   return (
-    <div>
-      <h2>Water Intake Chart</h2>
-      <BarChart width={600} height={300} data={data}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="date" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="intake" fill="#8884d8" />
-      </BarChart>
+    <div className={styles["charts-outer-container"]}>
+      <header>
+        <UserNavbar />
+      </header>
+      <h1>Charts</h1>
+      <Link to="/userhome">
+        <button>Back</button>
+      </Link>
 
-      <h2>Weight progress Chart</h2>
-      <BarChart width={600} height={300} data={dataWeights}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="date" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="weight" fill="#8884d8" />
-      </BarChart>
+      <div className={styles["charts-inner-container"]}>
+        <div className={styles["charts-outer-chart"]}>
+          <h2>Water Intake Chart</h2>
 
-      <h2>calorie Intake Chart</h2>
-      <BarChart width={600} height={300} data={dataEnergy}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="date" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="energy" fill="#8884d8" />
-      </BarChart>
+          <BarChart width={600} height={300} data={data}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="date" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="intake" fill="#007bff" />
+          </BarChart>
+        </div>
 
-      <h2>Fibre Intake Chart</h2>
-      <BarChart width={600} height={300} data={dataFibre}>
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="date" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Bar dataKey="fibre" fill="#8884d8" />
-      </BarChart>
+        <div className={styles["charts-outer-chart"]}>
+          <h2>Weight Chart</h2>
+          <BarChart width={600} height={300} data={dataWeights}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="date" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="weight" fill="#007bff" />
+          </BarChart>
+        </div>
 
+        <div className={styles["charts-outer-chart"]}>
+          <h2>Calorie Intake Chart</h2>
+          <BarChart width={600} height={300} data={dataEnergy}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="date" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="energy" fill="#007bff" />
+          </BarChart>
+        </div>
 
-
-
-
-
+        <div className={styles["charts-outer-chart"]}>
+          <h2>Fibre Intake Chart</h2>
+          <BarChart width={600} height={300} data={dataFibre}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="date" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="fibre" fill="#007bff" />
+          </BarChart>
+        </div>
+      </div>
     </div>
   );
 };

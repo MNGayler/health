@@ -4,6 +4,8 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import UserNavbar from "../Components/Navbars/UserNav";
+import styles from "../styles/UserUpdateItem.module.scss";
 
 const UserUpdateItem = () => {
   let navigate = useNavigate();
@@ -52,47 +54,97 @@ const UserUpdateItem = () => {
   };
 
   return (
-    <div>
-      <h1>update this item</h1>
+    <div className={styles["userupdateitem-container"]}>
+      <header>
+        <UserNavbar />
+      </header>
+
+      <h1 className={styles["userupdateitem-title"]} >Update Item</h1>
       <Link to={`/viewuserfooditem/${id}`}>
-        <button>Back</button>
+        <button className={styles["userupdateitem-backbutton"]}>Back</button>
       </Link>
-      <h1>update this item</h1>
-      <div className="updateContainer">
-        <div className="current">
-          <h2>The item currently:</h2>
+
+      <div className={styles["userupdateitem-rightleftcontainer"]}>
+        <div className={styles["userupdateitem-left"]}>
+          <h3>Current Values:</h3>
           <h2>{foodObject.food_name}</h2>
-          <div>food_name:{foodObject.food_name} </div>
+
           <div>Energy:{foodObject.energy} </div>
           <div>Protien:{foodObject.protien} </div>
           <div>Fibre:{foodObject.fibre} </div>
+          <div>Image:{foodObject.image} </div>
         </div>
-        <div className="new">
-          <h1>You will change the item to the following:</h1>
+
+        <div className={styles["userupdateitem-right"]}>
+          <h3>Changes:</h3>
           <Formik
             initialValues={initialValues}
             enableReinitialize
             onSubmit={onSubmit}
             validationSchema={validationSchema}
           >
-            <Form className="formContainer">
-              <label>Item Name: </label>
-              <ErrorMessage name="food_name" component="span" />
-              <Field id="inputAddItem" name="food_name" autoComplete="off" />
-              <label>Energy (cals/100g): </label>
-              <ErrorMessage name="energy" component="span" />
-              <Field id="inputAddItem" name="energy" autoComplete="off" />
-              <label>Protien (mg/100g): </label>
-              <ErrorMessage name="protien" component="span" />
-              <Field id="inputAddItem" name="protien" autoComplete="off" />
-              <label>Fibre (mg/100g): </label>
-              <ErrorMessage name="fibre" component="span" />
-              <Field id="inputAddItem" name="fibre" autoComplete="off" />
-              <label>Image: </label>
-              <ErrorMessage name="image" component="span" />
-              <Field id="inputAddItem" name="image" autoComplete="off" />
-              <button type="submit">Update Item</button>
-            </Form>
+            {({ errors, touched }) => (
+              <Form className={styles["userupdateitem-form"]}>
+                <div className={styles["form-group"]}>
+                  <label htmlFor="food_name">Item Name:</label>
+                  <ErrorMessage name="food_name" component="span" />
+                  <Field
+                    id="food_name"
+                    name="food_name"
+                    autoComplete="off"
+                    className={
+                      errors.food_name && touched.food_name ? "error" : ""
+                    }
+                  />
+                </div>
+                <div className={styles["form-group"]}>
+                  <label htmlFor="energy">Energy (cals/100g):</label>
+                  <ErrorMessage name="energy" component="span" />
+                  <Field
+                    id="energy"
+                    name="energy"
+                    autoComplete="off"
+                    className={errors.energy && touched.energy ? "error" : ""}
+                  />
+                </div>
+                <div className={styles["form-group"]}>
+                  <label htmlFor="protien">Protien (mg/100g):</label>
+                  <ErrorMessage name="protien" component="span" />
+                  <Field
+                    id="protien"
+                    name="protien"
+                    autoComplete="off"
+                    className={errors.protien && touched.protien ? "error" : ""}
+                  />
+                </div>
+                <div className={styles["form-group"]}>
+                  <label htmlFor="fibre">Fibre (mg/100g):</label>
+                  <ErrorMessage name="fibre" component="span" />
+                  <Field
+                    id="fibre"
+                    name="fibre"
+                    autoComplete="off"
+                    className={errors.fibre && touched.fibre ? "error" : ""}
+                  />
+                </div>
+                <div className={styles["form-group"]}>
+                  <label htmlFor="image">Image:</label>
+                  <ErrorMessage name="image" component="span" />
+                  <Field
+                    id="image"
+                    name="image"
+                    autoComplete="off"
+                    className={errors.image && touched.image ? "error" : ""}
+                  />
+                </div>
+                <button
+                  className={styles["userupdateitem-button"]}
+                  type="submit"
+                >
+                  Update Item
+                </button>
+              </Form>
+            )}
           </Formik>
         </div>
       </div>

@@ -1,12 +1,14 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-import AdminNav from '../Components/Navbars/AdminNav';
+import AdminNavbar from '../Components/Navbars/AdminNav';
+import styles from '../styles/AdminHome.module.scss'
+
 
 const AdminHome = () => {
   return (
     <div>
       <header>
-        <AdminNav />
+        <AdminNavbar />
       </header>
 
       <h1>this is admin home</h1>

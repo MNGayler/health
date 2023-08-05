@@ -3,6 +3,8 @@ import React from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import DatePicker from "react-date-picker";
+import styles from "../styles/ConsumeItem.module.scss";
+import UserNav from "../Components/Navbars/UserNav";
 
 import bananaImage from "../images/banana.jpg";
 import blueberryImage from "../images/blueberry.jpg";
@@ -77,7 +79,7 @@ const ConsumeGlobalItem = () => {
         console.error("Error recording consumption:", error);
       });
 
-    //START OF NUTRIENT_TRACKING TABLE SECTION  
+    //START OF NUTRIENT_TRACKING TABLE SECTION
 
     //calc nutrition consumed
     let nutriEnergy = foodObject.energy * (weightConsumed / 100);
@@ -93,7 +95,7 @@ const ConsumeGlobalItem = () => {
         const nutrientRow = response.data;
         if (nutrientRow) {
           // If a row is found, update it with the new nutrition values
-          
+
           nutriEnergy = nutriEnergy + nutrientRow.energy;
           nutriProtien = nutriProtien + nutrientRow.protien;
           nutriFibre = nutriFibre + nutrientRow.energy;
@@ -150,20 +152,31 @@ const ConsumeGlobalItem = () => {
   };
 
   return (
-    <div>
-      <h2>{foodObject.food_name}</h2>
-      <div className="global-image">
-        <img src={getImageSource()} alt={foodObject.food_name} />
-      </div>
-      <div>food_name:{foodObject.food_name} </div>
-      <div>Energy:{foodObject.energy} </div>
-      <div>Protien:{foodObject.protien} </div>
-      <div>Fibre:{foodObject.fibre} </div>
+    <div className={styles["consumeitem-container"]}>
+      <header>
+        <UserNav />
+      </header>
+
+      <h1>Consume Item</h1>
       <div>
         <Link to="/userallfooditems">
           <button>Back</button>
         </Link>
       </div>
+
+      <h2>{foodObject.food_name}</h2>
+      <div>
+        <img
+          className={styles["consumeitem-image"]}
+          src={getImageSource()}
+          alt={foodObject.food_name}
+        />
+      </div>
+
+      <div>Energy:{foodObject.energy} </div>
+      <div>Protien:{foodObject.protien} </div>
+      <div>Fibre:{foodObject.fibre} </div>
+
       <div>
         <p>
           {isDatePickerOpen ? (
@@ -180,7 +193,10 @@ const ConsumeGlobalItem = () => {
           ) : (
             `Date Consumed: ${dateConsumed.toDateString()}`
           )}
-          <button onClick={() => setIsDatePickerOpen(!isDatePickerOpen)}>
+          <button
+            className={styles["consumeitem-datebutton"]}
+            onClick={() => setIsDatePickerOpen(!isDatePickerOpen)}
+          >
             {isDatePickerOpen ? "Done" : "Select Date"}
           </button>
         </p>

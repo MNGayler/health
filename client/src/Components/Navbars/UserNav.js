@@ -50,7 +50,7 @@ const UserNav = () => {
           <Link className={styles["usernav-navlink"]} to="/charts">
             Charts
           </Link>
-          <Link className={styles["usernav-navlink"]} to="/">
+          <Link className={styles["usernav-navlink"]} to="/userlogout">
             Logout
           </Link>
         </div>

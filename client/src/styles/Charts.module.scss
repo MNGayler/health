@@ -1,0 +1,39 @@
+body,
+html {
+  height: 100%;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.charts-outer-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: #eae6e6;
+  margin: 485px 160px 0 160px ;
+  text-align: center;
+  border-radius: 3%;
+  padding: 0 40px;
+  
+  
+}
+.charts-inner-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px; 
+    overflow: auto; 
+    
+  }
+  
+  .charts-outer-chart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15); 
+    
+  }

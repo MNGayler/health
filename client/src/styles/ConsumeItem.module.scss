@@ -1,0 +1,39 @@
+
+body,
+html {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.consumeitem-container{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  background-color: #eae6e6;
+  text-align: center;
+  border-radius: 3%;
+  width: 800px;
+  max-width: 100%;
+  margin: 50px auto;
+  margin-top: 160px;
+  margin-bottom: 50px;
+  max-height: 90vh;
+  overflow-y: auto;
+
+}
+
+.consumeitem-image{
+    height: 200px;
+}
+
+.consumeitem-datebutton{
+    margin-left: 10px;
+}
+
+.consumeitem-foodtitle{
+    margin-top: -5px;
+}

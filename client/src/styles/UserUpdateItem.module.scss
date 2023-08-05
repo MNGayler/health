@@ -1,0 +1,63 @@
+body,
+html {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.userupdateitem-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: #eae6e6;
+  margin-top: 85px;
+  text-align: center;
+  height: 475px;
+  border-radius: 3%;
+  width: 800px;
+}
+
+.userupdateitem-title{
+    margin: -10px 0px;
+}
+
+.userupdateitem-backbutton{
+    margin-top: -10px;
+    margin-bottom: -10px;
+
+}
+
+.userupdateitem-rightleftcontainer {
+  display: flex;
+  justify-content: space-around;
+}
+
+.userupdateitem-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.userupdateitem-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.userupdateitem-button {
+  margin-bottom: 0px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+  }
+  
+  .form-group label {
+    text-align: right;
+  }
+  
+  .form-group input.error {
+    border: 1px solid red; 
+  }

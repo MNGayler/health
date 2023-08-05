@@ -1,0 +1,32 @@
+.adminnav-container {
+    background-color: #007bff;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0; 
+    left: 0; 
+    z-index: 999; }
+
+    .adminnav-navlinks {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        gap: 8px;
+        margin-right: 4px;
+      }
+      
+      .adminnav-welcome h3 {
+        color: white;
+      }
+
+      
+      
+      .adminnav-navlinks {
+        text-decoration: none;
+        color: white;
+      }
+      
+      

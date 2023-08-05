@@ -2,7 +2,9 @@ import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import UserNavbar from "../Components/Navbars/UserNav";
+import styles from "../styles/UserAddItem.module.scss";
 
 const UserAddItem = () => {
   let navigate = useNavigate();
@@ -41,57 +43,82 @@ const UserAddItem = () => {
   };
 
   return (
-    <div>
-      <h1>Users add new items here</h1>
-      <Formik
-        initialValues={initialValues}
-        onSubmit={onSubmit}
-        validationSchema={validationSchema}
-      >
-        <Form className="formContainer">
-          <label>Item Name: </label>
-          <ErrorMessage name="food_name" component="span" />
-          <Field
-            id="inputAddItem"
-            name="food_name"
-            placeholder="e.g. Apple"
-            autoComplete="off"
-          />
-          <label>Energy (cals/100g): </label>
-          <ErrorMessage name="energy" component="span" />
-          <Field
-            id="inputAddItem"
-            name="energy"
-            placeholder="e.g. 10"
-            autoComplete="off"
-          />
-          <label>Protien (mg/100g): </label>
-          <ErrorMessage name="protien" component="span" />
-          <Field
-            id="inputAddItem"
-            name="protien"
-            placeholder="e.g. 10"
-            autoComplete="off"
-          />
-          <label>Fibre (mg/100g): </label>
-          <ErrorMessage name="fibre" component="span" />
-          <Field
-            id="inputAddItem"
-            name="fibre"
-            placeholder="e.g. 10"
-            autoComplete="off"
-          />
-          <label>Image: </label>
-          <ErrorMessage name="image" component="span" />
-          <Field
-            id="inputAddItem"
-            name="image"
-            placeholder="path to image"
-            autoComplete="off"
-          />
-          <button type="submit">Add Item</button>
-        </Form>
-      </Formik>
+    <div className={styles["useradditem-container"]}>
+      <header>
+        <UserNavbar />
+      </header>
+
+      <h1>Add Item</h1>
+      <Link to="/usermyfooditems">
+        <button>Back</button>
+      </Link>
+      <div className={styles["userupdateitem-left"]}>
+        <Formik
+          initialValues={initialValues}
+          onSubmit={onSubmit}
+          validationSchema={validationSchema}
+        >
+          <Form>
+            <div className={styles["useradditems-form-group"]}>
+              <label>Item Name: </label>
+              <ErrorMessage name="food_name" component="span" />
+              <Field
+                id="inputAddItem"
+                name="food_name"
+                placeholder="e.g. Apple"
+                autoComplete="off"
+              />
+            </div>
+
+            <div className={styles["useradditems-form-group"]}>
+              <label>Energy (cals/100g): </label>
+              <ErrorMessage name="energy" component="span" />
+              <Field
+                id="inputAddItem"
+                name="energy"
+                placeholder="e.g. 10"
+                autoComplete="off"
+              />
+            </div>
+            <div className={styles["useradditems-form-group"]}>
+              <label>Protien (mg/100g): </label>
+              <ErrorMessage name="protien" component="span" />
+              <Field
+                id="inputAddItem"
+                name="protien"
+                placeholder="e.g. 10"
+                autoComplete="off"
+              />
+            </div>
+            <div className={styles["useradditems-form-group"]}>
+              <label>Fibre (mg/100g): </label>
+              <ErrorMessage name="fibre" component="span" />
+              <Field
+                id="inputAddItem"
+                name="fibre"
+                placeholder="e.g. 10"
+                autoComplete="off"
+              />
+            </div>
+            <div className={styles["useradditems-form-group"]}>
+              <label>Image: </label>
+              <ErrorMessage name="image" component="span" />
+              <Field
+                id="inputAddItem"
+                name="image"
+                placeholder="path to image"
+                autoComplete="off"
+              />
+            </div>
+            <button
+              className={styles["useradditems-form-button"]}
+              type="submit"
+            >
+              Add Item
+            </button>
+          </Form>
+        </Formik>
+      </div>
     </div>
   );
 };

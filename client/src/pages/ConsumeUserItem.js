@@ -3,6 +3,8 @@ import React from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import DatePicker from "react-date-picker";
+import UserNav from "../Components/Navbars/UserNav";
+import styles from "../styles/ConsumeItem.module.scss";
 
 import aubergineImage from "../images/aubergine.jpg";
 import onionImage from "../images/onion.jpg";
@@ -62,7 +64,7 @@ const ConsumeUserItem = () => {
       user: userId,
       food: foodObject.id,
       weight: weightConsumed,
-      is_global: false,
+
       date: dateConsumed,
     };
 
@@ -71,7 +73,6 @@ const ConsumeUserItem = () => {
       .post("http://localhost:6001/itemconsumption/useritem", consumptionData)
       .then((response) => {
         console.log(response.data);
-        
       })
       .catch((error) => {
         console.error("Error recording consumption:", error);
@@ -148,20 +149,34 @@ const ConsumeUserItem = () => {
   };
 
   return (
-    <div>
-      <h2>{foodObject.food_name}</h2>
-      <div className="global-image">
-        <img src={getImageSource()} alt={foodObject.food_name} />
+    <div className={styles["consumeitem-container"]}>
+      <header>
+        <UserNav />
+      </header>
+
+      <div>
+        <h1>Consume Item</h1>
+        <div>
+          <Link to="/userallfooditems">
+            <button>Back</button>
+          </Link>
+        </div>
+
+        <h2 className={styles["consumeitem-foodtitle"]}>
+          {foodObject.food_name}
+        </h2>
+
+        <img
+          className={styles["consumeitem-image"]}
+          src={getImageSource()}
+          alt={foodObject.food_name}
+        />
       </div>
-      <div>food_name:{foodObject.food_name} </div>
+
       <div>Energy:{foodObject.energy} </div>
       <div>Protien:{foodObject.protien} </div>
       <div>Fibre:{foodObject.fibre} </div>
-      <div>
-        <Link to="/userallfooditems">
-          <button>Back</button>
-        </Link>
-      </div>
+
       <div>
         <p>
           {isDatePickerOpen ? (
@@ -176,9 +191,12 @@ const ConsumeUserItem = () => {
               onCalendarClose={() => setIsDatePickerOpen(false)}
             />
           ) : (
-            `Date Consumed: ${dateConsumed.toDateString()}`
+            `Date Selected: ${dateConsumed.toDateString()}`
           )}
-          <button onClick={() => setIsDatePickerOpen(!isDatePickerOpen)}>
+          <button
+            className={styles["consumeitem-datebutton"]}
+            onClick={() => setIsDatePickerOpen(!isDatePickerOpen)}
+          >
             {isDatePickerOpen ? "Done" : "Select Date"}
           </button>
         </p>

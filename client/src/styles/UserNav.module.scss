@@ -1,14 +1,14 @@
 .usernav-container {
   background-color: #007bff;
-  width: 100%; /* Use the full width of the screen */
+  width: 100%; 
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  position: fixed; /* Set the position to fixed */
-  top: 0; /* Position it at the top */
-  left: 0; /* Position it at the left */
-  z-index: 999; /* Set the z-index to ensure it appears above other content */
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  z-index: 999; 
   
 }
 
@@ -27,4 +27,8 @@
 .usernav-navlink {
   text-decoration: none;
   color: white;
+}
+
+.adminnav-logo{
+  cursor: pointer;
 }
