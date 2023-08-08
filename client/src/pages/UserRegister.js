@@ -43,8 +43,6 @@ const UserRegister = () => {
       <div className={styles["userregister-logo"]}>
         <img src={Logo} alt="logo" />
       </div>
-
-      
       <h3>User Registration</h3>
       <Formik
         initialValues={initialValues}
@@ -54,55 +52,84 @@ const UserRegister = () => {
         <Form>
           <label>Username: </label>
           <ErrorMessage name="username" component="span"></ErrorMessage>
-          <Field className={styles["userregister-textbox"]} name="username" placeholder="john123...." />
+          <Field
+            className={styles["userregister-textbox"]}
+            name="username"
+            placeholder="john123...."
+          />
 
           <label>Email: </label>
           <ErrorMessage name="email" component="span"></ErrorMessage>
-          <Field className={styles["userregister-textbox"]} name="email" placeholder="you@yourmail.com" />
+          <Field
+            className={styles["userregister-textbox"]}
+            name="email"
+            placeholder="you@yourmail.com"
+          />
           <label>Password: </label>
           <ErrorMessage name="password" component="span"></ErrorMessage>
-          <Field className={styles["userregister-textbox"]} type="password" name="password" placeholder="your password" />
-
-          
+          <Field
+            className={styles["userregister-textbox"]}
+            type="password"
+            name="password"
+            placeholder="your password"
+          />
 
           <fieldset>
-          <legend>Personal info for tracking</legend>
-          <div>
-            <label htmlFor="height">Height (in m):</label>
-            <Field
-              className={styles["userregister-textbox"]}
-              type="number"
-              id="height"
-              name="height"
-              required
-              placeholder="1.7"
-            />
-            <ErrorMessage name="height" component="span" />
-          </div>
+            <legend>Personal info for tracking</legend>
+            <div>
+              <label htmlFor="height">Height (in m):</label>
+              <Field
+                className={styles["userregister-textbox"]}
+                type="number"
+                id="height"
+                name="height"
+                required
+                placeholder="1.7"
+              />
+              <ErrorMessage name="height" component="span" />
+            </div>
 
-          <div>
-            <label>Sex:</label>
-            <Field type="radio" id="male" name="sex" value="male" />
-            <label htmlFor="male">Male</label>
-            <Field type="radio" id="female" name="sex" value="female" />
-            <label htmlFor="female">Female</label>
-            <ErrorMessage name="sex" component="span" />
-          </div>
+            <div>
+              <label>Sex:</label>
+              <Field type="radio" id="male" name="sex" value="male" />
+              <label htmlFor="male">Male</label>
+              <Field type="radio" id="female" name="sex" value="female" />
+              <label htmlFor="female">Female</label>
+              <ErrorMessage name="sex" component="span" />
+            </div>
 
-          <div>
-            <label htmlFor="weight">Weight (in kg):</label>
-            <Field  className={styles["userregister-textbox"]} type="number" id="weight" name="weight" required />
-            <ErrorMessage name="weight" component="span" />
-          </div>
+            <div>
+              <label htmlFor="weight">Weight (in kg):</label>
+              <Field
+                className={styles["userregister-textbox"]}
+                type="number"
+                id="weight"
+                name="weight"
+                required
+              />
+              <ErrorMessage name="weight" component="span" />
+            </div>
 
-          <div>
-            <label htmlFor="age">Age: </label>
-            <Field className={styles["userregister-textbox"]} type="number" id="age" name="age" required />
-            <ErrorMessage name="age" component="span" />
-          </div>
+            <div>
+              <label htmlFor="age">Age: </label>
+              <Field
+                className={styles["userregister-textbox"]}
+                type="number"
+                id="age"
+                name="age"
+                required
+              />
+              <ErrorMessage name="age" component="span" />
+            </div>
           </fieldset>
-
-          <button className={styles["userregister-button"]} type="submit">Register</button>
+          <div className={styles["userregister-buttonsdiv"]}>
+            <button className={styles["userregister-button"]} type="submit">
+              Register
+            </button>
+            <Link to="/">
+              <button className={styles["userregister-button"]}>Back</button>
+            </Link>
+          </div>
         </Form>
       </Formik>
       If you already have an account? <Link to="/userlogin">login</Link>

@@ -1,5 +1,4 @@
 /* Home.module.scss */
-
 body,
 html {
   height: 100%;
@@ -7,19 +6,35 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-image: url("../images/backgrounds/fruit-boxes.jpg");
+  background-size: cover; 
+  background-repeat: no-repeat;
+  background-position: center center;
+
+
 }
 
-/* Center the container */
+
+  
+ 
+
 .home-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 80vh; /* Make sure the container takes up the full viewport height */
-  background-color: #eae6e6; /* Optional background color to visualize the container's area */
+  min-height: 80vh;
+  background-color: #eae6e6;
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(174, 247, 236),
+    #9cbfe5,
+    rgb(174, 247, 236),
+    #9cbfe5,
+    rgb(174, 247, 236)
+  );
   border: 6px solid #007bff;
   border-radius: 5%;
-
 
   .home-logo img {
     max-width: 100%;
@@ -30,7 +45,6 @@ html {
     padding-left: 30px;
     padding-right: 30px;
     padding-bottom: 30px;
-    
   }
 
   .home-buttons {

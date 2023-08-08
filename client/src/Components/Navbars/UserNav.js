@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from "react";
 import navLogo from "../../images/LogoWhiteonTransparent.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "../../styles/UserNav.module.scss";
 import axios from "axios";
 
 const UserNav = () => {
+  let navigate = useNavigate();
   // Fetch userId from sessionStorage
   const userId = sessionStorage.getItem("userId");
-
   const [username, setUsername] = useState("");
+
+  //log out functionality
+  const logout = () => {
+    sessionStorage.removeItem("accessToken");
+    sessionStorage.removeItem("userId");
+    navigate("/"); 
+  };
 
   useEffect(() => {
     const headers = { userId: userId };
@@ -50,7 +57,7 @@ const UserNav = () => {
           <Link className={styles["usernav-navlink"]} to="/charts">
             Charts
           </Link>
-          <Link className={styles["usernav-navlink"]} to="/userlogout">
+          <Link className={styles["usernav-navlink"]} onClick={logout} to="/">
             Logout
           </Link>
         </div>

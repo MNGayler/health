@@ -7,17 +7,15 @@ html {
   align-items: center;
 }
 
-
 .userregister-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 80vh; 
-  background-color: #eae6e6; 
+  min-height: 80vh;
+  background-color: #eae6e6;
   border: 6px solid #007bff;
   border-radius: 5%;
-  
 
   .userregister-logo img {
     max-width: 100%;
@@ -28,49 +26,53 @@ html {
     padding-left: 30px;
     padding-right: 30px;
     padding-bottom: 30px;
-  }}
+  }
+}
 
-  .userregister-button{
-    margin-top: 10px;
-    margin-left: 280px;
+.userregister-buttonsdiv {
+  margin-top: 10px;
+  margin-left: 245px;
+}
+
+.userregister-button {
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
+fieldset {
+  margin-top: 15px;
+}
+
+.userregister-textbox {
+  border: none;
+  border-bottom: 1px solid black;
+  background-color: #faf4f4;
+  margin: 2px;
+}
+
+button {
+  font-size: 18px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  margin-bottom: 50px;
+
+  /* Hover effect */
+  &:hover {
+    background-color: #0056b3;
+    transform: scale(1.1);
   }
 
-  fieldset {
-    margin-top: 15px;
+  /* Active effect */
+  &:active {
+    transform: scale(0.9);
   }
+}
 
-  .userregister-textbox {
-    border: none;
-    border-bottom: 1px solid black;
-    background-color: #faf4f4;
-    margin: 2px;
-  }
-
-
-
-  button {
-    font-size: 18px;
-    padding: 10px 20px;
-    border: none;
-    background-color: #007bff;
-    color: #fff;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: all 0.2s ease;
-    margin-bottom: 50px;
-
-    /* Hover effect */
-    &:hover {
-      background-color: #0056b3;
-      transform: scale(1.1);
-    }
-
-    /* Active effect */
-    &:active {
-      transform: scale(0.9);
-    }
-  }
-
-  span {
-    color: red;
-  }
+span {
+  color: red;
+}

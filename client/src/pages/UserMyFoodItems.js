@@ -23,7 +23,7 @@ const imageMapping = {
 
 // Get the user ID from session storage so we can send it with requests
 const userId = sessionStorage.getItem("userId");
-const headers = { userId: userId };
+//const headers = { userId: userId };
 
 const UserMyFoodItems = () => {
   let navigate = useNavigate();
@@ -31,7 +31,7 @@ const UserMyFoodItems = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:6001/userfooditems", { headers })
+      .get("http://localhost:6001/userfooditems", { headers: { userId } } )
       .then((response) => {
         setListOfUserFoodItems(response.data);
         console.log(response.data);
@@ -64,10 +64,7 @@ const UserMyFoodItems = () => {
           </Link>
         </div>
 
-        <h3>       
-          Select the item VIEW button for: NUTRITIONAL INFORMATION, to UPDATE or
-          to DELETE
-        </h3>
+        
 
         <div className={styles["usermyitems-itemcontainer"]}>
           {listOfUserFoodItems.map((value, index) => {

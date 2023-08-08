@@ -38,7 +38,7 @@ const UserLogin = () => {
       <h1>User login</h1>
       
       <div className={styles["userlogin-form"]}>
-        <p>email</p>
+        <p>Email:</p>
         <input
           type="text"
           onChange={(event) => {
@@ -48,7 +48,7 @@ const UserLogin = () => {
       </div>
 
       <div className={styles["userlogin-form"]}>    
-      <p>password</p>
+      <p>Password:</p>
       <input
         type="password"
         onChange={(event) => {
@@ -58,8 +58,12 @@ const UserLogin = () => {
       </div>
 
       <button className={styles["userlogin-button"]} onClick={login}>
-        login
+        Login
       </button>
+      <Link to="/">
+      <button className={styles["userlogin-backbutton"]} >
+        Back
+      </button></Link>
       <p>
         No account? <Link to="/userregister">register</Link>{" "}
       </p>

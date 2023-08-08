@@ -60,10 +60,7 @@ const GlobalFoodItems = () => {
           </Link>
         </div>
 
-        <h3>       
-          Select the item VIEW button for: NUTRITIONAL INFORMATION, to UPDATE or
-          to DELETE
-        </h3>
+        
 
         <div className={styles["globalfooditems-itemcontainer"]}>
           {listOfGlobalFoodItems.map((value, key) => {
@@ -77,7 +74,7 @@ const GlobalFoodItems = () => {
                   />
                 </div>
                 <div >
-                  <div>Food Name: {value.food_name}</div>
+                  <div>{value.food_name}</div>
                   <div >
                     {/* navigates to view chosen item with info and options */}
                     <button

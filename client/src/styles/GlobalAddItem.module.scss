@@ -5,6 +5,12 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-image: url("../images/backgrounds/fruit-boxes.jpg");
+  background-size: cover; 
+  background-repeat: no-repeat;
+  background-position: center;
+
+
 }
 
 .globaladditem-container {
@@ -17,6 +23,7 @@ html {
   height: 400px;
   border-radius: 3%;
   width: 800px;
+  
 }
 
 .globaladditems-form-group{

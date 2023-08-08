@@ -9,6 +9,13 @@ const AdminNav = () => {
     const adminId = sessionStorage.getItem("adminId");
     const [adminname, setAdminname] = useState("");
 
+    //log out functionality
+  const logout = () => {
+    sessionStorage.removeItem("accessToken");
+    sessionStorage.removeItem("adminId");
+     
+  };
+
     useEffect(() => {
         const headers = { userId: adminId};
         const fetchAdminname = async () => {
@@ -49,9 +56,9 @@ const AdminNav = () => {
             CRUD
           </Link>
           <Link className={styles["adminnav-navlinks"]} to="/registeradmin">
-            Add_Admins
+            Register
           </Link>
-          <Link className={styles["adminnav-navlinks"]} to="/adminlogout">
+          <Link className={styles["adminnav-navlinks"]} onClick={logout} to="/">
             Logout
           </Link>
         </div>
