@@ -10,6 +10,15 @@ html {
   flex-direction: column;
   align-items: center;
   background-color: #eae6e6;
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(174, 247, 236),
+    #9cbfe5,
+    rgb(174, 247, 236),
+    #9cbfe5,
+    rgb(174, 247, 236)
+  );
+
   text-align: center;
   border-radius: 3%;
   width: 800px;

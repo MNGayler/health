@@ -13,6 +13,14 @@ html {
   flex-direction: column;
   justify-content: space-around;
   background-color: #eae6e6;
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(174, 247, 236),
+    #9cbfe5,
+    rgb(174, 247, 236),
+    #9cbfe5,
+    rgb(174, 247, 236)
+  );
   text-align: center;
   height: 400px;
   width: 800px;
@@ -28,6 +36,10 @@ html {
 .registeradmin-button{
   margin-top: 10px;
   margin-left: 280px;
+}
+
+.registeradmin-back{
+  margin-bottom: 10px;
 }
 
 fieldset {

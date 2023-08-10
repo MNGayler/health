@@ -2,7 +2,7 @@ import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import AdminNavbar from "../Components/Navbars/AdminNav";
 import styles from "../styles/RegisterAdmin.module.scss";
 
@@ -36,7 +36,10 @@ const RegisterAdmin = () => {
         <AdminNavbar />
       </header>
 
-      <h1 className={styles["registeradmin-title"]} >Register Admin</h1>
+      <h1 className={styles["registeradmin-title"]}>Register Admin</h1>
+      <Link to="/adminhome">
+        <button className={styles["registeradmin-back"]}>Back</button>
+      </Link>
 
       <Formik
         initialValues={initialValues}
@@ -47,31 +50,31 @@ const RegisterAdmin = () => {
           <div className="registeradmin-fields">
             <div>
               <label>Username: </label>
-              <ErrorMessage name="username" component="span"></ErrorMessage>
               <Field
                 className={styles["registeradmin-textbox"]}
                 name="username"
                 placeholder="john123...."
               />
+              <ErrorMessage name="username" component="span"></ErrorMessage>
             </div>
             <div>
               <label>Email: </label>
-              <ErrorMessage name="email" component="span"></ErrorMessage>
               <Field
                 className={styles["registeradmin-textbox"]}
                 name="email"
                 placeholder="you@yourmail.com"
               />
+              <ErrorMessage name="email" component="span"></ErrorMessage>
             </div>
             <div>
               <label>Password: </label>
-              <ErrorMessage name="password" component="span"></ErrorMessage>
               <Field
                 className={styles["registeradmin-textbox"]}
                 type="password"
                 name="password"
                 placeholder="your password"
               />
+              <ErrorMessage name="password" component="span"></ErrorMessage>
             </div>
           </div>
           <button className={styles["registeradmin-button"]} type="submit">
@@ -79,7 +82,6 @@ const RegisterAdmin = () => {
           </button>
         </Form>
       </Formik>
-      
     </div>
   );
 };

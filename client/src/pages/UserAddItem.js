@@ -61,54 +61,54 @@ const UserAddItem = () => {
           <Form>
             <div className={styles["useradditems-form-group"]}>
               <label>Item Name: </label>
-              <ErrorMessage name="food_name" component="span" />
               <Field
                 id="inputAddItem"
                 name="food_name"
                 placeholder="e.g. Apple"
                 autoComplete="off"
               />
+              <ErrorMessage name="food_name" component="span" />
             </div>
 
             <div className={styles["useradditems-form-group"]}>
               <label>Energy (cals/100g): </label>
-              <ErrorMessage name="energy" component="span" />
               <Field
                 id="inputAddItem"
                 name="energy"
                 placeholder="e.g. 10"
                 autoComplete="off"
               />
+              <ErrorMessage name="energy" component="span" />
             </div>
             <div className={styles["useradditems-form-group"]}>
               <label>Protien (mg/100g): </label>
-              <ErrorMessage name="protien" component="span" />
               <Field
                 id="inputAddItem"
                 name="protien"
                 placeholder="e.g. 10"
                 autoComplete="off"
               />
+              <ErrorMessage name="protien" component="span" />
             </div>
             <div className={styles["useradditems-form-group"]}>
               <label>Fibre (mg/100g): </label>
-              <ErrorMessage name="fibre" component="span" />
               <Field
                 id="inputAddItem"
                 name="fibre"
                 placeholder="e.g. 10"
                 autoComplete="off"
               />
+              <ErrorMessage name="fibre" component="span" />
             </div>
             <div className={styles["useradditems-form-group"]}>
               <label>Image: </label>
-              <ErrorMessage name="image" component="span" />
               <Field
                 id="inputAddItem"
                 name="image"
                 placeholder="path to image"
                 autoComplete="off"
               />
+              <ErrorMessage name="image" component="span" />
             </div>
             <button
               className={styles["useradditems-form-button"]}

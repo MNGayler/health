@@ -17,6 +17,14 @@ html {
   align-items: center;
   min-height: 80vh; 
   background-color: #eae6e6; 
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(174, 247, 236),
+    #9cbfe5,
+    rgb(174, 247, 236),
+    #9cbfe5,
+    rgb(174, 247, 236)
+  );
   border: 6px solid #007bff;
   border-radius: 5%;
   

@@ -5,9 +5,13 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import AdminNavbar from "../Components/Navbars/AdminNav";
 import styles from "../styles/GlobalAddItem.module.scss";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const GlobalAddItem = () => {
   let navigate = useNavigate();
+
+  const notify = () => toast("Item added successfully!");
 
   //Formik initil form values
   const initialValues = {
@@ -27,24 +31,29 @@ const GlobalAddItem = () => {
   });
 
   //function that runs when the form is sent and redirects to global food items
-  const onSubmit = (data) => {
-    // Get the accessToken from sessionStorage
-    const accessToken = sessionStorage.getItem("accessToken");
-
-    // Set the headers for the request
-    const headers = {
-      accessToken: accessToken,
-    };
-
-    axios
-      .post("http://localhost:6001/globalfooditems", data, { headers: headers })
-      .then((response) => {
-        if (response.data.error) {
-          console.log("Error:", response.data.error);
-        } else {
+  const onSubmit = async (data) => {
+    try {
+      // Get the accessToken from sessionStorage
+      const accessToken = sessionStorage.getItem("accessToken");
+  
+      // Set the headers for the request
+      const headers = {
+        accessToken: accessToken,
+      };
+  
+      const response = await axios.post("http://localhost:6001/globalfooditems", data, { headers: headers });
+  
+      if (response.data.error) {
+        console.log("Error:", response.data.error);
+      } else {
+        notify();
+        setTimeout(() => {
           navigate("/globalfooditems");
-        }
-      });
+        }, 2000);
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
   };
 
   return (
@@ -52,7 +61,9 @@ const GlobalAddItem = () => {
       <header>
         <AdminNavbar />
       </header>
+
       <h1>Add Item</h1>
+
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}
@@ -118,6 +129,12 @@ const GlobalAddItem = () => {
           </button>
         </Form>
       </Formik>
+      <div>
+        <button onClick={notify}>Notify!</button>
+      </div>
+      <div>
+        <ToastContainer />
+      </div>
     </div>
   );
 };
