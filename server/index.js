@@ -2,12 +2,12 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 
+
 const db = require("./models");
 app.use(express.json());
 app.use(cors());
 
-
-
+app.use("/api-docs", express.static("doc"));
 //ROUTERS
 const globalFoodItemsRouter = require("./routes/Global_food_items");
 app.use("/globalfooditems", globalFoodItemsRouter);
@@ -27,6 +27,7 @@ const nutrientRouter = require("./routes/Nutrient");
 app.use("/nutrient", nutrientRouter)
 const chartRouter = require("./routes/Charts");
 app.use("/charts", chartRouter);
+
 
 
 //create database tables if they dont exist and start server

@@ -94,7 +94,7 @@ const UserAllFoodItems = () => {
                   />
                 </div>
                 <div className="info">
-                  <div>Food name: {value.food_name}</div>
+                  <div>{value.food_name}</div>
                   <div className="buttons">
                     {/* navigates to view chosen item with info and options */}
                     <button onClick={() => navigateToItem(value)}>View</button>

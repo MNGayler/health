@@ -1,3 +1,4 @@
+
 const express = require("express");
 const router = express.Router();
 const { users } = require("../models");
@@ -5,6 +6,20 @@ const bcrypt = require("bcrypt");
 const { sign } = require("jsonwebtoken");
 
 //REGISTER an admin into users table
+/**
+ * @api {post} /authadmin Register an admin
+ * @apiName RegisterAdmin
+ * @apiGroup Admin
+ *
+ * @apiParamExample {json} Request Body
+ * {
+ *   "username": "adminUsername",
+ *   "email": "admin@example.com",
+ *   "password": "adminPassword"
+ * }
+ *
+ * @apiSuccess {String} message Success message
+ */
 router.post("/", async (req, res) => {
   const { username, email, password } = req.body;
   bcrypt.hash(password, 10).then((hash) => {
@@ -19,6 +34,19 @@ router.post("/", async (req, res) => {
 });
 
 //LOGIN an admin
+/**
+ * @api {post} / Login an admin
+ * @apiName LoginAdmin
+ * @apiGroup Admin
+ *
+ * @apiParamExample {json} Request Body
+ * {
+ *   "email": "admin@example.com",
+ *   "password": "adminPassword"
+ * }
+ *
+ * @apiSuccess {String} message Success message
+ */
 
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;

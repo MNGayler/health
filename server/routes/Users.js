@@ -5,7 +5,41 @@ const bcrypt = require("bcrypt");
 const { sign } = require("jsonwebtoken");
 
 //Register a user
-
+/**
+ * @api {post} / Register a user
+ * @apiName RegisterUser
+ * @apiGroup User
+ *
+ * @apiParam {String} username User's username
+ * @apiParam {String} email User's email
+ * @apiParam {String} password User's password
+ * @apiParam {Number} height User's height
+ * @apiParam {String} sex User's sex ("male" or "female")
+ * @apiParam {Number} weight User's weight
+ * @apiParam {Number} age User's age
+ *
+ * @apiSuccess {Boolean} success Indicates whether the registration was successful
+ * @apiSuccess {Number} user_id User ID of the registered user
+ *
+ * @apiSuccessExample {json} Success Response
+ * HTTP/1.1 200 OK
+ * {
+ *   "success": true,
+ *   "user_id": 123
+ * }
+ *
+ * @apiErrorExample {json} Error Response
+ * HTTP/1.1 500 Internal Server Error
+ * {
+ *   "success": false,
+ *   "error": "Failed to register user."
+ * }
+ *
+ * @apiDescription This endpoint registers a new user in the system.
+ * The registration process involves creating a new user entry in the 'users' table,
+ * as well as related entries in the 'personal_info' and 'weight_tracking' tables.
+ * The provided user information includes username, email, password, height, sex, weight, and age.
+ */
 router.post("/", async (req, res) => {
   const { username, email, password, height, sex, weight, age } = req.body;
 
@@ -65,6 +99,16 @@ router.post("/", async (req, res) => {
 });
 
 //LOGIN a user
+/**
+ * @api {post} /auth/login Login a user
+ * @apiName LoginUser
+ * @apiGroup User
+ *
+ * @apiParam {String} email User's email
+ * @apiParam {String} password User's password
+ *
+ * @apiSuccess {String} accessToken Access token for the authenticated user
+ */
 
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
@@ -92,6 +136,15 @@ router.post("/login", async (req, res) => {
 });
 
 // Get user for username for navbar presentation
+/**
+ * @api {get} /auth/name Get user's username for navbar presentation
+ * @apiName GetUsernameForNavbar
+ * @apiGroup User
+ *
+ * @apiHeader {String} userId User's ID in the request header
+ *
+ * @apiSuccess {String} username User's username for navbar presentation
+ */
 router.get("/name", async (req, res) => {
   // Get user from header
   const userId = req.header("userId");
