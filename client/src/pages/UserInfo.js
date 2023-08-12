@@ -73,7 +73,6 @@ const UserInfo = () => {
 
   //For weight tracking including age
   useEffect(() => {
-   
     // Make the GET request to fetch the user information from the server
     axios
       .get("http://localhost:6001/weight/recent", { headers })
@@ -81,6 +80,7 @@ const UserInfo = () => {
         const { recentWeight, date, BMI, RMR, age, id } = response.data;
         // Update the state variables with the received data
         setRecentWeight(recentWeight);
+        setUserWeight(recentWeight);
         setRecentDate(date);
         setCurrentBMI(BMI);
         setDailyCalories(RMR);
@@ -92,7 +92,7 @@ const UserInfo = () => {
       })
       .catch((error) => {
         console.error("Error fetching user information:", error);
-        // Set loading to false 
+        // Set loading to false
         setLoading(false);
       });
   }, []);
@@ -111,8 +111,8 @@ const UserInfo = () => {
     };
 
     // Calculate BMI and RMR based on the new weight
-    const updatedBMI = calculateBMI(recentWeight);
-    const updatedRMR = calculateRMR(recentWeight);
+    const updatedBMI = calculateBMI(userWeight);
+    const updatedRMR = calculateRMR(userWeight);
 
     // Update the data object with the calculated BMI and RMR
     data.BMI = updatedBMI;
@@ -151,15 +151,17 @@ const UserInfo = () => {
 
   // Display a loading message while data is fetched
   if (loading) {
-    return <p>Loading...</p>; 
+    return <p>Loading...</p>;
   }
+
+  
   const formattedDate = formatDate(recentDate);
 
   return (
     <div className={styles["userinfo-container"]}>
-    <header>
-      <UserNavbar />
-    </header>
+      <header>
+        <UserNavbar />
+      </header>
 
       <h1>User Information</h1>
       <Link to="/userhome">
@@ -170,11 +172,11 @@ const UserInfo = () => {
           <h3>Current information</h3>
           <p>Last update: {formattedDate} </p>
           <p>Your most recent weight: {recentWeight} kg</p>
-          <p>Your current BMI is : {currentBMI} </p>
+          {/* <p>Your current BMI is : {currentBMI} </p>
           <p>
             At rest you will burn approximately(Basal metabolic rate):{" "}
             {dailyCalories} calories per day
-          </p>
+          </p> */}
         </div>
         <div className="bottom-div">
           <h3>Update your weight</h3>
@@ -185,10 +187,12 @@ const UserInfo = () => {
                 type="number"
                 value={userWeight}
                 onChange={(e) => setUserWeight(e.target.value)}
-              />{" "}
+              />
               kg
             </label>
-            <button className={styles["userinfo-button"]} type="submit">Submit</button>
+            <button className={styles["userinfo-button"]} type="submit">
+              Submit
+            </button>
           </form>
           <h3>Update your Age</h3>
           <p>Your age is set to {initialAge} years</p>
@@ -202,7 +206,9 @@ const UserInfo = () => {
               />
               years
             </label>
-            <button className={styles["userinfo-button"]} type="submit">Submit</button>
+            <button className={styles["userinfo-button"]} type="submit">
+              Submit
+            </button>
           </form>
         </div>
       </div>

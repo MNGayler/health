@@ -13,7 +13,7 @@ router.get("/recent", async (req, res) => {
       where: {
         user: userId,
       },
-      order: [["date", "DESC"]],
+      order: [["id", "DESC"]],
     });
     // get the required data from the field
     const recentWeight = recentWeightEntry.weight;

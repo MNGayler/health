@@ -6,6 +6,7 @@ import DatePicker from "react-date-picker";
 import styles from "../styles/ConsumeItem.module.scss";
 import UserNav from "../Components/Navbars/UserNav";
 
+
 import bananaImage from "../images/banana.jpg";
 import blueberryImage from "../images/blueberry.jpg";
 import grapeImage from "../images/grape.jpg";
@@ -177,10 +178,11 @@ const ConsumeGlobalItem = () => {
       <div>Protien:{foodObject.protien} </div>
       <div>Fibre:{foodObject.fibre} </div>
 
-      <div>
+      <div className={styles["consumeitem-dateinput"]}>
         <p>
           {isDatePickerOpen ? (
             <DatePicker
+            className={styles["react-date-picker"]}
               onChange={(date) => {
                 setDateConsumed(date);
                 setIsDatePickerOpen(false);
