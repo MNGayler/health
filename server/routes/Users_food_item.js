@@ -1,21 +1,4 @@
-/* 
-This module contains the Api routes for USER food items, the items created by individual users for themselves.
 
-This module uses the user_food_item and global_food_item models for database operations. 
-The database table, user_food_item, is populated only by users.
-The database table, global_food_item, is populated only by admins.
-
-
-This module contains the following routes:
-
-GET    /userfooditems: Retrieves a list of all the users personal food items.
-POST   /userfooditems: Creates a new user food item.
-GET    /userfooditems/byId/:id: Retrieves a user food item by ID.
-PUT    /userfooditems/byId/:id: Updates a user food item by ID.
-DELETE /userfooditems/byId/:id: Deletes a user food item by ID
-GET    /userfooditems/all: returns the user's items and global items table to return both sets.
-
-*/
 
 const express = require("express");
 const router = express.Router();

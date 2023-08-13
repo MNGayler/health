@@ -1,18 +1,3 @@
-/* 
-This module contains the Api routes for Global food items, the items shared by all users.
-
-This module uses the global_food_item model for database operations. This database table is 
-populated only by Admin Users.
-
-This module contains the following routes:
-
-GET    /globalfooditems: Retrieves a list of all global food items.
-GET    /globalfooditems/byId/:id: Retrieves a global food item by ID.
-POST   /globalfooditems: Creates a new global food item.
-PUT    /globalfooditems/byId/:id: Updates a global food item by ID.
-DELETE /globalfooditems/byId/:id: Deletes a global food item by ID
-
-*/
 
 const express = require("express");
 const router = express.Router();
