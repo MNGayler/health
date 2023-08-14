@@ -381,12 +381,24 @@ async function testNutrientEndpointWithInvalidUser() {
   req.end();
 }
 
-testWaterEndpoint();
-testWaterEndpoint2();
-testWaterEndpointWithInvalidUser();
-testWeightEndpoint();
-testWeightEndpoint2();
-testWeightEndpointWithInvalidUser();
-testNutrientEndpoint();
-testNutrientEndpoint2();
-testNutrientEndpointWithInvalidUser();
+// testWaterEndpoint();
+// testWaterEndpoint2();
+// testWaterEndpointWithInvalidUser();
+// testWeightEndpoint();
+// testWeightEndpoint2();
+// testWeightEndpointWithInvalidUser();
+// testNutrientEndpoint();
+// testNutrientEndpoint2();
+// testNutrientEndpointWithInvalidUser();
+// Export all the test functions
+module.exports = {
+  testWaterEndpoint,
+  testWaterEndpoint2,
+  testWaterEndpointWithInvalidUser,
+  testWeightEndpoint,
+  testWeightEndpoint2,
+  testWeightEndpointWithInvalidUser,
+  testNutrientEndpoint,
+  testNutrientEndpoint2,
+  testNutrientEndpointWithInvalidUser
+};

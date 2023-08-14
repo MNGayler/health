@@ -6,7 +6,7 @@ const { sign } = require("jsonwebtoken");
 
 //Register a user
 /**
- * @api {post} / Register a user
+ * @api {post} /auth Register a user
  * @apiName RegisterUser
  * @apiGroup User
  *
@@ -14,7 +14,7 @@ const { sign } = require("jsonwebtoken");
  * @apiParam {String} email User's email
  * @apiParam {String} password User's password
  * @apiParam {Number} height User's height
- * @apiParam {String} sex User's sex ("male" or "female")
+ * @apiParam {String} sex User's sex 
  * @apiParam {Number} weight User's weight
  * @apiParam {Number} age User's age
  *
@@ -25,7 +25,7 @@ const { sign } = require("jsonwebtoken");
  * HTTP/1.1 200 OK
  * {
  *   "success": true,
- *   "user_id": 123
+ *   "user_id": 12
  * }
  *
  * @apiErrorExample {json} Error Response
@@ -135,15 +135,15 @@ router.post("/login", async (req, res) => {
   });
 });
 
-// Get user for username for navbar presentation
+
 /**
- * @api {get} /auth/name Get user's username for navbar presentation
+ * @api {get} /auth/name Get user's username
  * @apiName GetUsernameForNavbar
  * @apiGroup User
  *
  * @apiHeader {String} userId User's ID in the request header
  *
- * @apiSuccess {String} username User's username for navbar presentation
+ * @apiSuccess {String} User's username for navbar 
  */
 router.get("/name", async (req, res) => {
   // Get user from header

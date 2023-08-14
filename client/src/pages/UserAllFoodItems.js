@@ -103,7 +103,7 @@ const UserAllFoodItems = () => {
               </div>
             );
           })}
-          {/* Handle empty userItems scenario */}
+          {/* Handle empty userItems */}
           {listOfAllFoodItems.length === 0 && (
             <div>No items found for this user.</div>
           )}

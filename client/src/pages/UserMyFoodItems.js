@@ -42,7 +42,7 @@ const UserMyFoodItems = () => {
     if (image && imageMapping.hasOwnProperty(image)) {
       return imageMapping[image];
     }
-    return aubergineImage; // fallback image
+    return aubergineImage; // fallback image (abergine - user and strawberry - global)
   };
 
   return (
